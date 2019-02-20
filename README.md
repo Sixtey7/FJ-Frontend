@@ -1,5 +1,10 @@
 # FJ-Frontend
 
+## About
+Front end for a small 'Finance Journal' style application that will be used to track finances.  
+
+Written as an experiment in playing with Vue.js
+
 ## Project setup
 ```
 yarn install
