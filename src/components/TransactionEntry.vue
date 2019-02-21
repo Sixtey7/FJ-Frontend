@@ -1,7 +1,7 @@
 <template>
     <div class = "trans-item">
         <h3>{{ name }}</h3>
-        <p>Account \${{ amount }}</p>
+        <p>Amount: ${{ amount }}</p>
         <input :value = "amount" type = "number" @input="$emit('update:amount', parseInt($event.target.value))">
         <p>Type: {{ type }}</p>
         <div v-if="date"><p>Date: {{ date }}</p></div>
