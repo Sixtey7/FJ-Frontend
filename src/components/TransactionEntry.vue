@@ -2,7 +2,8 @@
     <div class = "trans-item">
         <h3>{{ name }}</h3>
         <p>Amount: ${{ amount }}</p>
-        <input :value = "amount" type = "number" @input="$emit('update:amount', parseInt($event.target.value))">
+        <!--input :value = "amount" type = "number" @input = "$emit('update:amount', parseInt($event.target.value))"-->
+        <input v-model = "amount" type = "number">
         <p>Type: {{ type }}</p>
         <div v-if="date"><p>Date: {{ date }}</p></div>
         <div v-if="notes"><p>Notes: {{ notes }}</p></div>

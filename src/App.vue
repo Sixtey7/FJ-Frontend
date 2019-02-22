@@ -3,10 +3,12 @@
     <img alt="Vue logo" src="./assets/logo.png">
     <!--HelloWorld msg="Welcome to Your Vue.js App"/-->
     <TransactionEntry
-      :key = "123"
-      :amount = "1234"
-      :type = "Planned"
-      :name = "Hello"
+      v-for = "trans in transArray"
+      :key = "trans.id"
+      :amount = "trans.amount"
+      :type = "trans.type"
+      :name = "trans.name"
+      :date = "trans.date"
     />
   </div>
 </template>
@@ -18,8 +20,22 @@ export default {
   name: 'app',
   components: {
     TransactionEntry
+  },
+  data() {
+    return {
+      transArray : [
+      { 
+        key: 1,
+        name: 'Hello',
+        type: 'Planned',
+        amount: 1234,
+        date: new Date()
+      }
+      ]  
+    }
   }
 }
+
 </script>
 
 <style>
