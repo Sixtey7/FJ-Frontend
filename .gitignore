@@ -60,5 +60,5 @@ typings/
 # next.js build output
 .next
 
-# where I'm throwing my vue src
-vue/
+# where the build outputs go
+dist/
