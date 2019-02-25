@@ -30,6 +30,13 @@ export default {
         type: 'Planned',
         amount: 1234,
         date: new Date()
+      },
+      {
+        key: 2,
+        name: 'Goodbye',
+        type: 'Future',
+        amount: 2345,
+        date: new Date()
       }
       ]  
     }
