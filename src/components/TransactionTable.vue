@@ -12,11 +12,11 @@
             </thead>
             <tbody>
                 <tr v-for = "transaction in transactions" :key = "transaction.id">
-                    <td>{{ transaction.name }}</td>
+                    <StringCell :stringToShow="transaction.name" />
                     <MoneyCell :amount="transaction.amount" />
-                    <td>{{ transaction.type }}</td>
-                    <td>{{ transaction.date }}</td>
-                    <td>{{ transaction.notes }}</td>
+                    <StringCell :stringToShow="transaction.type" />
+                    <DateCell :dateToShow="transaction.date" />
+                    <StringCell :stringToShow="transaction.notes" />
                 </tr>
             </tbody>
         </table>
@@ -25,12 +25,16 @@
 
 
 <script>
+import DateCell from './DateCell.vue';
 import MoneyCell from './MoneyCell.vue';
+import StringCell from './StringCell.vue';
 
 export default {
     name: "TransactionTable",
     components: {
-        MoneyCell
+        DateCell,
+        MoneyCell,
+        StringCell
     },
     props: {
         transactions: Array
