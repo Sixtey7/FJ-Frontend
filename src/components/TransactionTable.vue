@@ -13,7 +13,7 @@
             <tbody>
                 <tr v-for = "transaction in transactions" :key = "transaction.id">
                     <td>{{ transaction.name }}</td>
-                    <td>{{ transaction.amount }}</td>
+                    <MoneyCell :amount="transaction.amount" />
                     <td>{{ transaction.type }}</td>
                     <td>{{ transaction.date }}</td>
                     <td>{{ transaction.notes }}</td>
@@ -25,10 +25,15 @@
 
 
 <script>
+import MoneyCell from './MoneyCell.vue';
+
 export default {
     name: "TransactionTable",
+    components: {
+        MoneyCell
+    },
     props: {
-        transactions: Object
+        transactions: Array
     }
 }
 </script>

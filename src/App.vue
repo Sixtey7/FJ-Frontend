@@ -10,16 +10,22 @@
       :name = "trans.name"
       :date = "trans.date"
     />
+
+    <TransactionTable
+      :transactions = "transArray"
+    />
   </div>
 </template>
 
 <script>
 import TransactionEntry from './components/TransactionEntry.vue';
+import TransactionTable from './components/TransactionTable.vue';
 
 export default {
   name: 'app',
   components: {
-    TransactionEntry
+    TransactionEntry,
+    TransactionTable
   },
   data() {
     return {
@@ -29,7 +35,8 @@ export default {
         name: 'Hello',
         type: 'Planned',
         amount: 1234,
-        date: new Date()
+        date: new Date(),
+        notes: 'I\'m a note'
       },
       {
         key: 2,
