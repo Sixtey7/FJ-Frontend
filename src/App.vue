@@ -1,15 +1,5 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <TransactionEntry
-      v-for = "trans in transArray"
-      :key = "trans.id"
-      :amount = "trans.amount"
-      :type = "trans.type"
-      :name = "trans.name"
-      :date = "trans.date"
-    />
-
     <TransactionTable
       :transactions = "transArray"
     />
@@ -17,13 +7,11 @@
 </template>
 
 <script>
-import TransactionEntry from './components/TransactionEntry.vue';
 import TransactionTable from './components/TransactionTable.vue';
 
 export default {
   name: 'app',
   components: {
-    TransactionEntry,
     TransactionTable
   },
   data() {
