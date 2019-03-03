@@ -1,13 +1,13 @@
 <template>
     <div class = "trans-table">
-        <table>
+        <table class = "table">
             <thead>
                 <tr>
-                    <th>Name</th>
-                    <th>Amount</th>
-                    <th>Type</th>
-                    <th>Date</th>
-                    <th>Notes</th>
+                    <th scope = "col">Name</th>
+                    <th scope = "col">Amount</th>
+                    <th scope = "col">Type</th>
+                    <th scope = "col">Date</th>
+                    <th scope = "col">Notes</th>
                 </tr>
             </thead>
             <tbody>
