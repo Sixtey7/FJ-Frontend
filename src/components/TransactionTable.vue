@@ -1,7 +1,7 @@
 <template>
     <div class = "trans-table">
-        <table class = "table">
-            <thead>
+        <table class = "table table-bordered table-hover table-sm">
+            <thead class = "thead-dark">
                 <tr>
                     <th scope = "col">Name</th>
                     <th scope = "col">Amount</th>
