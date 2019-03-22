@@ -31,6 +31,13 @@ export default {
         type: 'Future',
         amount: 2345,
         date: new Date()
+      },
+      {
+        key: 3,
+        name: 'Desktop Test',
+        type: 'Future',
+        amount: 1000,
+        date: new Date()
       }
       ]  
     }
