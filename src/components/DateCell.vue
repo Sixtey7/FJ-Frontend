@@ -15,7 +15,7 @@ export default {
             if (!value) {
                 return;
             }
-            return moment(value).format('MM/DD/YY');
+            return moment(value).format('MMM DD, YYYY');
         }
     }
 }
