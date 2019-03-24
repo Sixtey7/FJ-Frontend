@@ -8,6 +8,7 @@
 
 <script>
 import TransactionTable from './components/TransactionTable.vue';
+import axios from 'axios';
 
 export default {
   name: 'app',
@@ -16,7 +17,7 @@ export default {
   },
   data() {
     return {
-      transArray : [
+      transArray :null /*[
       { 
         key: 1,
         name: 'Hello',
@@ -39,8 +40,23 @@ export default {
         amount: 1000,
         date: new Date()
       }
-      ]  
+      ],*/,
+      txs: null  
     }
+  },
+  mounted () {
+    this.transArray = new Array();
+    axios
+      .get('http://localhost:8081/transactions')
+      .then(response => {
+        //TODO: This cleanup should likely be performed elsewhere
+        response.data.forEach(element => {
+            element.date = new Date(element.date);
+            this.transArray.push(element);
+        });
+        //TODO: This should likely be all that needs to happen here
+        //this.transArray = response.data;
+      });
   }
 }
 
