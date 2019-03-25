@@ -49,13 +49,8 @@ export default {
     axios
       .get('http://localhost:8081/transactions')
       .then(response => {
-        //TODO: This cleanup should likely be performed elsewhere
-        response.data.forEach(element => {
-            element.date = new Date(element.date);
-            this.transArray.push(element);
-        });
-        //TODO: This should likely be all that needs to happen here
-        //this.transArray = response.data;
+        //TODO: we might want to massage this data at some point
+        this.transArray = response.data;
       });
   }
 }
