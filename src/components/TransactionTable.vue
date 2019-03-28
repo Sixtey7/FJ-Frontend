@@ -5,6 +5,7 @@
                 <tr>
                     <th scope = "col">Name</th>
                     <th scope = "col">Amount</th>
+                    <th scope = "col">Balance</th>
                     <th scope = "col">Type</th>
                     <th scope = "col">Date</th>
                     <th scope = "col">Notes</th>
@@ -14,6 +15,7 @@
                 <tr v-for = "transaction in transactions" :key = "transaction.id">
                     <StringCell :stringToShow="transaction.name" />
                     <MoneyCell :amount="transaction.amount" />
+                    <MoneyCell :amount=0 />
                     <StringCell :stringToShow="transaction.type" />
                     <DateCell :dateToShow="transaction.date" />
                     <StringCell :stringToShow="transaction.notes" />
