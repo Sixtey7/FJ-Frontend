@@ -17,30 +17,7 @@ export default {
   },
   data() {
     return {
-      transArray :null /*[
-      { 
-        key: 1,
-        name: 'Hello',
-        type: 'Planned',
-        amount: 1234,
-        date: new Date(),
-        notes: 'I\'m a note'
-      },
-      {
-        key: 2,
-        name: 'Goodbye',
-        type: 'Future',
-        amount: 2345,
-        date: new Date()
-      },
-      {
-        key: 3,
-        name: 'Desktop Test',
-        type: 'Future',
-        amount: 1000,
-        date: new Date()
-      }
-      ],*/,
+      transArray :null,
       txs: null  
     }
   },
