@@ -8,6 +8,8 @@
 
 <script>
 import TransactionTable from './components/TransactionTable.vue';
+import TransactionHelper from './utils/TransactionHelper.js'; 
+
 import axios from 'axios';
 
 export default {
@@ -26,8 +28,7 @@ export default {
     axios
       .get('http://localhost:8081/transactions')
       .then(response => {
-        //TODO: we might want to massage this data at some point
-        this.transArray = response.data;
+        this.transArray = new TransactionHelper().massageTransactions(response.data);
       });
   }
 }
