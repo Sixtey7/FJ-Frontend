@@ -15,7 +15,7 @@
                 <tr v-for = "transaction in transactions" :key = "transaction.id">
                     <StringCell :stringToShow="transaction.name" />
                     <MoneyCell :amount="transaction.amount" />
-                    <MoneyCell :amount=0 />
+                    <MoneyCell :amount="transaction.balance" />
                     <StringCell :stringToShow="transaction.type" />
                     <DateCell :dateToShow="transaction.date" />
                     <StringCell :stringToShow="transaction.notes" />
