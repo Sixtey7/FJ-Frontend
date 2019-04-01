@@ -30,8 +30,10 @@ class TransactionHelper {
     }
 
     _calculateBalance(transactionList) {
+        let currentBalance = 0;
         transactionList.forEach(transaction => {
-            transaction.balance = 0;
+            currentBalance += transaction.amount;
+            transaction.balance = currentBalance;
         })
     }
 }
