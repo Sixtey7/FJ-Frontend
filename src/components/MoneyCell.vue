@@ -11,10 +11,10 @@ export default {
     computed: {
         amountToShow: function() {
             if (this.amount < 0) {
-                return "($" + (-1 * this.amount) + ")";
+                return "($" + (-1 * this.amount.toFixed(2)) + ")";
             }
             else {
-                return "$" + this.amount;
+                return "$" + this.amount.toFixed(2);
             }
         }
     }
