@@ -1,5 +1,8 @@
 <template>
   <div id="app">
+    <Button type = "button" id="add-button" class="btn btn-success">
+        Add Tx
+    </Button>
     <TransactionTable
       :transactions = "transArray"
     />
@@ -9,6 +12,7 @@
 <script>
 import TransactionTable from './components/TransactionTable.vue';
 import TransactionHelper from './utils/TransactionHelper.js'; 
+
 
 import axios from 'axios';
 
@@ -43,5 +47,9 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+
+#add-button {
+  float: right;
 }
 </style>
