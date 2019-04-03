@@ -3,6 +3,9 @@
         <table class = "table table-bordered table-hover table-sm">
             <thead class = "thead-dark">
                 <tr>
+                    <th colspan="6">Transactions</th>
+                </tr>
+                <tr>
                     <th scope = "col">Name</th>
                     <th scope = "col">Amount</th>
                     <th scope = "col">Balance</th>
