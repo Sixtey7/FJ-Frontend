@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <Button type = "button" id="add-button" class="btn btn-success">
+    <button v-on:click = "add" type = "button" id="add-button" class="btn btn-success">
         Add Tx
-    </Button>
+    </button> 
     <TransactionTable
       :transactions = "transArray"
     />
@@ -34,6 +34,11 @@ export default {
       .then(response => {
         this.transArray = new TransactionHelper().massageTransactions(response.data);
       });
+  },
+  methods: {
+    add: function() {
+      alert('hello');
+    }
   }
 }
 
