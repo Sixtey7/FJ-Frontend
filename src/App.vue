@@ -1,10 +1,14 @@
 <template>
   <div id="app">
-    <button v-on:click = "add" type = "button" id="add-button" class="btn btn-success">
+    <button v-on:click = "showModal" type = "button" id="add-button" class="btn btn-success">
         Add Tx
     </button> 
     <TransactionTable
       :transactions = "transArray"
+    />
+    <modal
+      v-show="isModalVisible"
+      @close="closeModal"
     />
   </div>
 </template>
@@ -12,6 +16,7 @@
 <script>
 import TransactionTable from './components/TransactionTable.vue';
 import TransactionHelper from './utils/TransactionHelper.js'; 
+import modal from './components/modal.vue';
 
 
 import axios from 'axios';
@@ -19,12 +24,14 @@ import axios from 'axios';
 export default {
   name: 'app',
   components: {
-    TransactionTable
+    TransactionTable,
+    modal
   },
   data() {
     return {
       transArray :null,
-      txs: null  
+      txs: null  ,
+      isModalVisible: false
     }
   },
   mounted () {
@@ -36,8 +43,11 @@ export default {
       });
   },
   methods: {
-    add: function() {
-      alert('hello');
+    showModal() {
+      this.isModalVisible = true;
+    },
+    closeModal() {
+      this.isModalVisible = false;
     }
   }
 }
