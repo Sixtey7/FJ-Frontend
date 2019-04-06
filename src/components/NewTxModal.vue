@@ -1,6 +1,7 @@
 <script>
     export default {
         name: 'NewTxModal',
+        props: ['show'],
         methods: {
             close() {
                 this.$emit('close');
@@ -9,117 +10,102 @@
     }
 </script>
 <template>
-    <transition name = "modal-fade">
-        <div class = "modal-backdrop" role="dialog">
-            <div class = "modal" ref="modal">
-                <header class="modal-header">
-                    <slot name = "header">
-                        This is the default title!
-
-                        <button
-                            type = "button"
-                            class = "btn-close"
-                            @click = "close">
-                            x
-                        </button>
-                    </slot>
-                </header>
-                <section class = "modal-body">
-                    <slot name = "body">
-                        I'm the default body!
-                    </slot>
-                </section>
-                <footer class = "modal-footer">
-                    <slot name = "footer">
-                        I'm the default footer!
-
-                        <button
-                            type = "button"
-                            class = "btn-green"
-                            @click = "close"
-                        >
-                        Close Me!
-                        </button>
-                    </slot>
-                </footer>
+    <transition name = "modal">
+        <div class = "modal-mask" v-show = "show">
+            <div class = "modal-container">
+                <div class = "modal-header">
+                    <h3>New Transaction</h3>
+                </div>
+                <div class = "modal-body">
+                    Form goes here
+                </div>
+                <div class = "modal-footer text-right">
+                    <button class = "modal-default-button" @click="close()">
+                        Close!
+                    </button>
+                </div>
             </div>
         </div>
     </transition>
 </template>
 <style>
-.btn {
-  padding: 8px 16px;
-  border-radius: 3px;
-  font-size: 14px;
-  cursor: pointer;
-}
-.modal-backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+* {
+    box-sizing: border-box;
 }
 
-.modal {
-  background: #ffffff;
-  box-shadow: 2px 2px 20px 1px;
-  overflow-x: auto;
-  display: flex;
-  flex-direction: column;
+.modal-mask {
+    position: fixed;
+    z-index: 9998;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, .5);
+    transition: opacity .3s ease;
 }
 
-.modal-header,
-.modal-footer {
-  padding: 15px;
-  display: flex;
+.modal-container {
+    width: 300px;
+    margin: 40px auto 0;
+    padding: 20px 30px;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .33);
+    transition: all .3s ease;
+    font-family: Helvetica, Arial, sans-serif;
 }
 
-.modal-header {
-  border-bottom: 1px solid #eeeeee;
-  color: #4aae9b;
-  justify-content: space-between;
-}
-
-.modal-footer {
-  border-top: 1px solid #eeeeee;
-  justify-content: flex-end;
+.modal-header h3 {
+    margin-top: 0;
+    color: #42b983;
 }
 
 .modal-body {
-  position: relative;
-  padding: 20px 10px;
+    margin: 20px 0;
 }
 
-.btn-close {
-  border: none;
-  font-size: 20px;
-  padding: 20px;
-  cursor: pointer;
-  font-weight: bold;
-  color: #4aae9b;
-  background: transparent;
+.text-right {
+    text-align: right;
 }
 
-.btn {
-  color: white;
-  background: #4aae9b;
-  border: 1px solid #4aae9b;
-  border-radius: 2px;
+.form-label {
+    display: block;
+    margin-bottom: 1em;
 }
 
-.modal-fade-enter,
-.modal-fade-leave-active {
+.form-label > .form-control {
+    margin-top: 0.5em;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0.5em 1em;
+    line-height: 1.5;
+    border: 1px solid #ddd;
+}
+
+/*
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+ */
+
+.modal-enter {
   opacity: 0;
 }
 
-.modal-fade-enter-active,
-.modal-fade-leave-active {
-  transition: opacity 0.5s ease;
+.modal-leave-active {
+  opacity: 0;
+}
+
+.modal-enter .modal-container,
+.modal-leave-active .modal-container {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 </style>

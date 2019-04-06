@@ -6,7 +6,7 @@
     <TransactionTable
       :transactions = "transArray"
     />
-    <modal
+    <NewTxModal
       v-show="isModalVisible"
       @close="closeModal"
     />
@@ -16,7 +16,7 @@
 <script>
 import TransactionTable from './components/TransactionTable.vue';
 import TransactionHelper from './utils/TransactionHelper.js'; 
-import modal from './components/modal.vue';
+import NewTxModal from './components/NewTxModal.vue';
 
 
 import axios from 'axios';
@@ -25,7 +25,7 @@ export default {
   name: 'app',
   components: {
     TransactionTable,
-    modal
+    NewTxModal
   },
   data() {
     return {
