@@ -17,7 +17,31 @@
                     <h3>New Transaction</h3>
                 </div>
                 <div class = "modal-body">
-                    Form goes here
+                    <form id = "transactionForm" @submit.prevent="handleSubmit">
+                        <label for="name">Name:</label>
+                        <input id = "name" v-model="name" placeholder="Name of Trans">
+                        <br/>
+                        <label for = "amount">Amount $</label>
+                        <input id = "amount" v-model.number="amount" placeholder="0" type="number">
+                        <br />
+                        <label for = "type">Type</label>
+                        <select v-model="type">
+                            <option disabled value="">Please Select</option>
+                            <option>Planned</option>
+                            <option>Estimate</option>
+                            <option>Pending</option>
+                            <option>Confirmed</option>
+                            <option>Future</option>
+                        </select>
+                        <br />
+                        <label for = "date">Date</label>
+                        <input id = "date" v-model="date" type="date">
+                        <br />
+                        <label for = "notes">Notes</label>
+                        <textarea id = "notes" v-model="notes" placeholder = "Notes"></textarea>
+                        <br/>
+                        <button type="submit">Submit</button>
+                    </form>
                 </div>
                 <div class = "modal-footer text-right">
                     <button class = "modal-default-button" @click="close()">
