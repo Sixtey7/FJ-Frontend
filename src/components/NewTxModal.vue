@@ -5,6 +5,10 @@
         methods: {
             close() {
                 this.$emit('close');
+            },
+            setCurrency() {
+                // eslint-disable-next-line
+                console.log("Make it look like dollars!");
             }
         }
     }
@@ -24,7 +28,7 @@
                         </div>
                         <div class = "form-group">
                             <label for = "amount">Amount $</label>
-                            <input id = "amount" v-model.number="amount" placeholder="0" type="number" class = "form-control">
+                            <input id = "amount" v-model.number="amount" placeholder="0" type="number" class = "form-control" step="0.01" v-on:blur="setCurrency()">
                         </div>
                         <div class = "form-group">
                             <label for = "type">Type</label>
