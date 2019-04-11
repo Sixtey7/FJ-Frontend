@@ -1,17 +1,40 @@
 <script>
+    var currency = 'USD';
     export default {
         name: 'NewTxModal',
         props: ['show'],
+        data: function() {
+            return {    
+                name: '',
+                amount: 0,
+                type: '',
+                date: new Date().toISOString().slice(0,10),
+                notes: ''
+            }
+        },
         methods: {
             close() {
                 this.$emit('close');
             },
             setCurrency() {
-                // eslint-disable-next-line
-                console.log("Make it look like dollars!");
+                  const options = {
+                    maximumFractionDigits : 2,
+                    currency              : currency,
+                    style                 : "currency",
+                    currencyDisplay       : "symbol"
+                }
+
+                this.amount = this.amount ? _localStringToNumber(this.amount).toLocaleString(undefined, options) : ''
+            },
+            onFocus(){
+                this.amount = this.amount ? _localStringToNumber(this.amount) : '';
             }
         }
     }
+
+    function _localStringToNumber( s ){
+        return Number(String(s).replace(/[^0-9.-]+/g,""));
+}
 </script>
 <template>
     <transition name = "modal">
@@ -28,7 +51,7 @@
                         </div>
                         <div class = "form-group">
                             <label for = "amount">Amount $</label>
-                            <input id = "amount" v-model.number="amount" placeholder="0" type="number" class = "form-control" step="0.01" v-on:blur="setCurrency()">
+                            <input id = "amount" v-model.number="amount" placeholder="0" type="text" class = "form-control" v-on:blur="setCurrency()" v-on:focus="onFocus()">
                         </div>
                         <div class = "form-group">
                             <label for = "type">Type</label>
