@@ -72,13 +72,11 @@
                             <label for = "notes">Notes</label>
                             <textarea id = "notes" v-model="notes" placeholder = "Notes" class = "form-control"></textarea>
                         </div>
-                        <button type="submit" class = "btn btn-primary" @click="close()">Submit</button>
+                        <button type="button" class = "btn btn-primary" @click="close()" style="float: left">Cancel</button>
+                        <button type="submit" class = "btn btn-primary" @click="close()" style="float: right">Submit</button>
                     </form>
                 </div>
                 <div class = "modal-footer text-right">
-                    <button class = "modal-default-button" @click="close()">
-                        Close!
-                    </button>
                 </div>
             </div>
         </div>
