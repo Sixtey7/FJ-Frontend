@@ -15,7 +15,6 @@ export default {
             if (!value) {
                 return;
             }
-            //value = new Date(value);
             return moment(value).format('MMM DD, YYYY');
         }
     }
