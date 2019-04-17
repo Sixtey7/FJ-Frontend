@@ -3,7 +3,7 @@
         <table class = "table table-bordered table-hover table-sm">
             <thead class = "thead-dark">
                 <tr>
-                    <th colspan="6">Transactions</th>
+                    <th colspan="7">Transactions</th>
                 </tr>
                 <tr>
                     <th scope = "col">Name</th>
@@ -12,6 +12,7 @@
                     <th scope = "col">Type</th>
                     <th scope = "col">Date</th>
                     <th scope = "col">Notes</th>
+                    <th scope = "col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -22,6 +23,10 @@
                     <StringCell :stringToShow="transaction.type" />
                     <DateCell :dateToShow="transaction.date" />
                     <StringCell :stringToShow="transaction.notes" />
+                    <td>
+                        <ButtonCell :id="transaction.id" text="E" style = "margin-right: 5px;"/>
+                        <ButtonCell :id="transaction.id" text="D" style = "margin-left: 5px;"/>
+                    </td>
                 </tr>
             </tbody>
         </table>
@@ -33,13 +38,15 @@
 import DateCell from './DateCell.vue';
 import MoneyCell from './MoneyCell.vue';
 import StringCell from './StringCell.vue';
+import ButtonCell from './ButtonCell.vue';
 
 export default {
     name: "TransactionTable",
     components: {
         DateCell,
         MoneyCell,
-        StringCell
+        StringCell,
+        ButtonCell
     },
     props: {
         transactions: Array
