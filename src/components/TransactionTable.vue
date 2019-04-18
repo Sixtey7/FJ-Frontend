@@ -24,8 +24,8 @@
                     <DateCell :dateToShow="transaction.date" />
                     <StringCell :stringToShow="transaction.notes" />
                     <td>
-                        <ButtonCell :id="transaction.id" text="E" style = "margin-right: 5px;"/>
-                        <ButtonCell :id="transaction.id" text="D" style = "margin-left: 5px;"/>
+                        <ButtonCell :id="transaction.transId" text="E" style = "margin-right: 5px;" @clicked="editTx"/>
+                        <ButtonCell :id="transaction.transId" text="D" style = "margin-left: 5px;" @clicked="deleteTx"/>
                     </td>
                 </tr>
             </tbody>
@@ -50,6 +50,16 @@ export default {
     },
     props: {
         transactions: Array
+    },
+    methods: {
+        editTx(txToEdit) {
+            // eslint-disable-next-line
+            console.log('editing a transaction: ' + txToEdit);
+        },
+        deleteTx(txToDelete) {
+            // eslint-disable-next-line
+            console.log('deleting a transaction: ' + txToDelete);
+        }
     }
 }
 </script>
