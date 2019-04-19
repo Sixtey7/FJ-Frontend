@@ -23,10 +23,7 @@
                     <StringCell :stringToShow="transaction.type" />
                     <DateCell :dateToShow="transaction.date" />
                     <StringCell :stringToShow="transaction.notes" />
-                    <td>
-                        <ButtonCell :id="transaction.transId" text="E" style = "margin-right: 5px;" @clicked="editTx"/>
-                        <ButtonCell :id="transaction.transId" text="D" style = "margin-left: 5px;" @clicked="deleteTx"/>
-                    </td>
+                    <ButtonCell :id="transaction.transId" @edit="editTx" @delete="deleteTx" />
                 </tr>
             </tbody>
         </table>
