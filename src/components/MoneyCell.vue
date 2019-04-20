@@ -3,6 +3,13 @@
 </template>
 
 <script>
+const options = {
+    maximumFractionDigits : 2,
+    currency              : "USD",
+    style                 : "currency",
+    currencyDisplay       : "symbol"
+};
+
 export default {
     name: "MoneyCell",
     props: {
@@ -11,10 +18,10 @@ export default {
     computed: {
         amountToShow: function() {
             if (this.amount < 0) {
-                return "($" + (-1 * this.amount.toFixed(2)) + ")";
+                return "(" + Math.abs(this.amount).toLocaleString(undefined, options) + ")";
             }
             else {
-                return "$" + this.amount.toFixed(2);
+                return this.amount.toLocaleString(undefined, options);
             }
         }
     }
