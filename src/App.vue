@@ -7,7 +7,7 @@
       :transactions = "transArray"
     />
     <NewTxModal
-      v-show="isModalVisible"
+      :show="isModalVisible"
       @close="closeModal"
     />
   </div>

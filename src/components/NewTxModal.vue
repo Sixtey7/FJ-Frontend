@@ -32,6 +32,15 @@
             onFocus(){
                 this.amount = this.amount ? _localStringToNumber(this.amount) : '';
             }
+        },
+        watch: {
+            show: function(show) {
+                if (show) {
+                    //we'll want to set the values of the modal if another prop was provided
+                    // eslint-disable-next-line
+                    console.log('Showing!');
+                }
+            }
         }
     }
 
