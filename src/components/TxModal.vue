@@ -2,22 +2,28 @@
     var currency = 'USD';
     export default {
         name: 'NewTxModal',
-        props: ['show'],
+        props: ['show', 'txToEdit'],
         data: function() {
             return {    
-                name: '',
-                amount: 0,
-                type: '',
-                date: new Date().toISOString().slice(0,10),
-                notes: ''
+                transaction: {}
             }
         },
         methods: {
             close() {
+                this.clearValues();
                 this.$emit('close');
             },
             save() {
-                this.$emit('close');
+                this.$emit('close', this.transaction);
+                this.clearValues();
+            },
+            clearValues() {
+                this.transaction.transId = '';
+                this.transaction.name = '';
+                this.transaction.amount = 0;
+                this.transaction.type = '';
+                this.transaction.date = new Date().toISOString().slice(0,10);
+                this.transaction.notes = '';
             },
             setCurrency() {
                   const options = {
@@ -37,8 +43,14 @@
             show: function(show) {
                 if (show) {
                     //we'll want to set the values of the modal if another prop was provided
-                    // eslint-disable-next-line
-                    console.log('Showing!');
+                    if (this.txToEdit) {
+                        //TODO: This is a really hacky way to do the deep copy
+                        this.transaction = JSON.parse(JSON.stringify(this.txToEdit));
+                        this.transaction.date = new Date(this.transaction.date).toISOString().slice(0,10);
+                    }
+                    else {
+                        this.clearValues();
+                    }
                 }
             }
         }
@@ -56,36 +68,37 @@
                     <h3>New Transaction</h3>
                 </div>
                 <div class = "modal-body">
-                    <form id = "transactionForm" @submit.prevent="handleSubmit">
+                    <form id = "transactionForm" @submit.prevent="save">
                         <div class = "form-group">
                             <label for="name">Name:</label>
-                            <input id = "name" v-model="name" placeholder="Name of Trans" class = "form-control">
+                            <input id = "name" v-model="transaction.name" placeholder="Name of Trans" class = "form-control">
                         </div>
                         <div class = "form-group">
                             <label for = "amount">Amount $</label>
-                            <input id = "amount" v-model.number="amount" placeholder="0" type="text" class = "form-control" v-on:blur="setCurrency()" v-on:focus="onFocus()">
+                            <input id = "amount" v-model.number="transaction.amount" placeholder="0" type="text" class = "form-control" v-on:blur="setCurrency()" v-on:focus="onFocus()">
                         </div>
                         <div class = "form-group">
                             <label for = "type">Type</label>
-                            <select v-model="type" class = "form-control">
+                            <select id = "type" v-model="transaction.type" class = "form-control">
+                                <!--TODO: Eventually I don't want these to be all caps -->
                                 <option disabled value="">Please Select</option>
-                                <option>Planned</option>
-                                <option>Estimate</option>
-                                <option>Pending</option>
-                                <option>Confirmed</option>
-                                <option>Future</option>
+                                <option>PLANNED</option>
+                                <option>ESTIMATE</option>
+                                <option>PENDING</option>
+                                <option>CONFIRMED</option>
+                                <option>FUTURE</option>
                             </select>
                         </div>
                         <div class = "form-group">
                             <label for = "date">Date</label>
-                            <input id = "date" v-model="date" type="date" class = "form-control">
+                            <input id = "date" v-model="transaction.date" type="date" class = "form-control">
                         </div>
                         <div class = "form-group">
                             <label for = "notes">Notes</label>
-                            <textarea id = "notes" v-model="notes" placeholder = "Notes" class = "form-control"></textarea>
+                            <textarea id = "notes" v-model="transaction.notes" placeholder = "Notes" class = "form-control"></textarea>
                         </div>
                         <button type="button" class = "btn btn-primary" @click="close()" style="float: left">Cancel</button>
-                        <button type="submit" class = "btn btn-primary" @click="save()" style="float: right">Submit</button>
+                        <button type="submit" class = "btn btn-primary" style="float: right">Submit</button>
                     </form>
                 </div>
                 <div class = "modal-footer text-right">

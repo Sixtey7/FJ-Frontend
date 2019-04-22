@@ -5,9 +5,11 @@
     </button> 
     <TransactionTable
       :transactions = "transArray"
+      @edit="editTx"
     />
     <TxModal
       :show="isModalVisible"
+      :txToEdit="txToShow"
       @close="closeModal"
     />
   </div>
@@ -31,7 +33,8 @@ export default {
     return {
       transArray :null,
       txs: null  ,
-      isModalVisible: false
+      isModalVisible: false,
+      txToShow: null
     }
   },
   mounted () {
@@ -46,8 +49,25 @@ export default {
     showModal() {
       this.isModalVisible = true;
     },
-    closeModal() {
+    closeModal(transToSave) {
       this.isModalVisible = false;
+      this.txToShow = null;
+      if (transToSave) {
+        // eslint-disable-next-line
+        console.log('Transaction was provided: ' + JSON.stringify(transToSave));
+      }
+      else {
+        // eslint-disable-next-line
+        console.log('no trans provided!');
+      }
+    },
+    editTx(idToEdit) {
+      // eslint-disable-next-line
+      console.log('App is editing a transction: ---' + idToEdit + '---');
+      this.txToShow = this.transArray.find(transaction => transaction.transId === idToEdit);
+      // eslint-disable-next-line
+      console.log('filtered to the transaction: ' + this.txToShow.transId);
+      this.isModalVisible = true;
     }
   }
 }

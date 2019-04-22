@@ -52,6 +52,7 @@ export default {
         editTx(txToEdit) {
             // eslint-disable-next-line
             console.log('editing a transaction: ' + txToEdit);
+            this.$emit('edit', txToEdit);
         },
         deleteTx(txToDelete) {
             // eslint-disable-next-line
