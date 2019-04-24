@@ -33,10 +33,10 @@
                     currencyDisplay       : "symbol"
                 }
 
-                this.amount = this.amount ? _localStringToNumber(this.amount).toLocaleString(undefined, options) : ''
+                this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount).toLocaleString(undefined, options) : ''
             },
             onFocus(){
-                this.amount = this.amount ? _localStringToNumber(this.amount) : '';
+                this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount) : '';
             }
         },
         watch: {
