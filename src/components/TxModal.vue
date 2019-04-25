@@ -14,7 +14,7 @@
                 this.$emit('close');
             },
             save() {
-                this.$emit('close', this.transaction);
+                this.$emit('save', this.transaction);
                 this.clearValues();
             },
             clearValues() {

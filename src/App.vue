@@ -11,6 +11,7 @@
       :show="isModalVisible"
       :txToEdit="txToShow"
       @close="closeModal"
+      @save="saveTx"
     />
   </div>
 </template>
@@ -49,17 +50,15 @@ export default {
     showModal() {
       this.isModalVisible = true;
     },
-    closeModal(transToSave) {
+    closeModal() {
       this.isModalVisible = false;
       this.txToShow = null;
-      if (transToSave) {
-        // eslint-disable-next-line
-        console.log('Transaction was provided: ' + JSON.stringify(transToSave));
-      }
-      else {
-        // eslint-disable-next-line
-        console.log('no trans provided!');
-      }
+    },
+    saveTx(transToSave) {
+      this.isModalVisible = false;
+      this.txToShow = null;
+      // eslint-disable-next-line
+      console.log('Transaction was provided: ' + JSON.stringify(transToSave));
     },
     editTx(idToEdit) {
       // eslint-disable-next-line
