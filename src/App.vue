@@ -57,8 +57,18 @@ export default {
     saveTx(transToSave) {
       this.isModalVisible = false;
       this.txToShow = null;
-      // eslint-disable-next-line
-      console.log('Transaction was provided: ' + JSON.stringify(transToSave));
+
+      //determine if this a new tx or an edit
+      if (transToSave.transId) {
+        // eslint-disable-next-line
+        console.log('Saving an edited transaction: ' + JSON.stringify(transToSave));
+        this._postTransaction(transToSave);
+      }
+      else {
+        // eslint-disable-next-line
+        console.log('Adding a new transaction: ' + JSON.stringify(transToSave));
+        this._putTransaction(transToSave);
+      }
     },
     editTx(idToEdit) {
       // eslint-disable-next-line
@@ -67,6 +77,51 @@ export default {
       // eslint-disable-next-line
       console.log('filtered to the transaction: ' + this.txToShow.transId);
       this.isModalVisible = true;
+    },
+    _putTransaction(transToPut) {
+      transToPut.accountId = "c7f6892b-5767-422f-b33d-0dd9d01f4446";
+      delete transToPut.transId;
+      transToPut.transId = "c7f6892b-5767-422f-b33d-0dd9d01f4446";
+      let transJSON = JSON.stringify(transToPut);
+      axios({
+        method: 'put',
+        url: 'http://localhost:8081/transactions',
+        headers: {
+          'Content-type': 'application/json',
+        },
+        data: 
+          transJSON
+        
+      })
+      .then(response => {
+          // eslint-disable-next-line
+          console.log('got the response: ' + JSON.stringify(response));
+        })
+      .catch(error => {
+        // eslint-disable-next-line
+        console.log('got the error: ' + error);
+      });
+    },
+    _postTransaction(transToPost) {
+      // eslint-disable-next-line
+      let transJSON = JSON.stringify(transToPost);
+      axios({
+        method: 'post',
+        url: 'http://localhost:8081/transactions/' + transToPost.transId,
+        headers: {
+          'Content-type' : 'application/json'
+        },
+        data: 
+          transJSON
+      })
+      .then(response => {
+        // eslint-disable-next-line
+        console.log('got the response: ' + JSON.stringify(response));
+      })
+      .catch(error => {
+        // eslint-disable-next-line
+        console.log('Got the error: ' + error);
+      });
     }
   }
 }

@@ -14,6 +14,7 @@
                 this.$emit('close');
             },
             save() {
+                this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount) : '';
                 this.$emit('save', this.transaction);
                 this.clearValues();
             },
@@ -98,7 +99,7 @@
                             <textarea id = "notes" v-model="transaction.notes" placeholder = "Notes" class = "form-control"></textarea>
                         </div>
                         <button type="button" class = "btn btn-primary" @click="close()" style="float: left">Cancel</button>
-                        <button type="submit" class = "btn btn-primary" style="float: right">Submit</button>
+                        <button type="button" class = "btn btn-primary" @click="save()" style="float: right">Submit</button>
                     </form>
                 </div>
                 <div class = "modal-footer text-right">
