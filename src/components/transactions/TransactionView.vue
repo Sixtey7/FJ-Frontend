@@ -43,17 +43,17 @@ export default {
   },
   mounted() {
     this.transArray = new Array();
-    axios
-      .get('http://localhost:8081/transactions')
-      .then(response => {
-        this.transArray = new TransactionHelper().massageTransactions(response.data);
-      });
+    this.accountsArray = new Array();
+    
+    //get the data
+    let txPromise = axios.get('http://localhost:8081/transactions');
+    let accountPromise = axios.get('http://localhost:8081/accounts');
 
-    axios
-      .get('http://localhost:8081/accounts')
-      .then(response => {
-        this.accountsArray = response.data;
-      })
+      Promise.all([txPromise, accountPromise])
+        .then(responses => {
+          this.transArray = new TransactionHelper().massageTransactions(responses[0].data);
+          this.accountsArray = responses[1].data;
+      });
   },
   methods: {
     showModal() {
