@@ -2,7 +2,7 @@
     var currency = 'USD';
     export default {
         name: 'NewTxModal',
-        props: ['show', 'txToEdit'],
+        props: ['show', 'txToEdit', 'accounts'],
         data: function() {
             return {    
                 transaction: {}
@@ -20,6 +20,7 @@
             },
             clearValues() {
                 this.transaction.transId = '';
+                this.transaction.accountId = '';
                 this.transaction.name = '';
                 this.transaction.amount = 0;
                 this.transaction.type = '';
@@ -71,7 +72,16 @@
                 <div class = "modal-body">
                     <form id = "transactionForm" @submit.prevent="save">
                         <div class = "form-group">
-                            <label for="name">Name:</label>
+                            <label for="account">Account</label>
+                            <select id = "accountId" v-model="transaction.accountId" class="form-control">
+                                <option disble value="">Please Select</option>
+                                <option v-for = "account in this.accounts" :key="account.id" :value="account.id">
+                                    {{ account.name }}
+                                </option>
+                            </select>
+                        </div>
+                        <div class = "form-group">
+                            <label for="name">Name</label>
                             <input id = "name" v-model="transaction.name" placeholder="Name of Trans" class = "form-control">
                         </div>
                         <div class = "form-group">

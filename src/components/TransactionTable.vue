@@ -46,7 +46,8 @@ export default {
         ButtonCell
     },
     props: {
-        transactions: Array
+        transactions: Array,
+        accounts: Array
     },
     methods: {
         editTx(txToEdit) {

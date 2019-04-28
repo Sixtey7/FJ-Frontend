@@ -5,11 +5,13 @@
     </button> 
     <TransactionTable
       :transactions = "transArray"
+      :accounts = "accountsArray"
       @edit="editTx"
     />
     <TxModal
       :show="isModalVisible"
       :txToEdit="txToShow"
+      :accounts = "accountsArray"
       @close="closeModal"
       @save="saveTx"
     />
@@ -33,18 +35,25 @@ export default {
   data() {
     return {
       transArray :null,
+      accountsArray: null,
       txs: null  ,
       isModalVisible: false,
       txToShow: null
     }
   },
-  mounted () {
+  mounted() {
     this.transArray = new Array();
     axios
       .get('http://localhost:8081/transactions')
       .then(response => {
         this.transArray = new TransactionHelper().massageTransactions(response.data);
       });
+
+    axios
+      .get('http://localhost:8081/accounts')
+      .then(response => {
+        this.accountsArray = response.data;
+      })
   },
   methods: {
     showModal() {
@@ -79,9 +88,8 @@ export default {
       this.isModalVisible = true;
     },
     _putTransaction(transToPut) {
-      transToPut.accountId = "c7f6892b-5767-422f-b33d-0dd9d01f4446";
+      //need to delete the empty transId to prevent the UI from trying to handle it
       delete transToPut.transId;
-      transToPut.transId = "c7f6892b-5767-422f-b33d-0dd9d01f4446";
       let transJSON = JSON.stringify(transToPut);
       axios({
         method: 'put',
