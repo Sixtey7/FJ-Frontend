@@ -32,10 +32,10 @@
 
 
 <script>
-import DateCell from './DateCell.vue';
-import MoneyCell from './MoneyCell.vue';
-import StringCell from './StringCell.vue';
-import ButtonCell from './ButtonCell.vue';
+import DateCell from '../cells/DateCell.vue';
+import MoneyCell from '../cells/MoneyCell.vue';
+import StringCell from '../cells/StringCell.vue';
+import ButtonCell from '../cells/ButtonCell.vue';
 
 export default {
     name: "TransactionTable",
