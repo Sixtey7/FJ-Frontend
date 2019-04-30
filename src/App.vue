@@ -1,16 +1,18 @@
 <template>
   <div id = "app">
-    <TransactionView />
+    <!--TransactionView /-->
+    <AccountView />
   </div>
 </template>
 
 <script>
-import TransactionView from './components/transactions/TransactionView.vue';
-
+//import TransactionView from './components/transactions/TransactionView.vue';
+import AccountView from './components/accounts/AccountView.vue';
 export default {
   name: 'app',
   components: {
-    TransactionView
+  //  TransactionView,
+    AccountView
   }
 }
 
