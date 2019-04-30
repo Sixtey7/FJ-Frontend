@@ -1,17 +1,28 @@
 <template>
   <div id = "app">
-    <!--TransactionView /-->
-    <AccountView />
+    <ul class="nav nav-pills nav-fill" id = "nav" role = "tablist">
+      <li class="nav-item"><a class="nav-link active" href="#accounts" id = "accoubts-tab" data-toggle="tab" role="tab">Accounts</a></li>
+      <li class="nav-item"><a class="nav-link" href="#transactions" id = "transactions-tab" data-toggle="tab" role="tab">Transactions</a></li>
+    </ul>
+
+    <div class = "tab-content" id = "navContent">
+      <div class = "tab-pane fade show active" id = "accounts" role = "tabpanel">
+        <AccountView />
+      </div>
+      <div class = "tab-pane fade" id = "transactions" role = "tabpanel">
+        <TransactionView />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-//import TransactionView from './components/transactions/TransactionView.vue';
+import TransactionView from './components/transactions/TransactionView.vue';
 import AccountView from './components/accounts/AccountView.vue';
 export default {
   name: 'app',
   components: {
-  //  TransactionView,
+    TransactionView,
     AccountView
   }
 }
@@ -19,7 +30,7 @@ export default {
 </script>
 
 <style>
-#app {
+ #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
