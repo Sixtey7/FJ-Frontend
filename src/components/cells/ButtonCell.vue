@@ -21,7 +21,7 @@ export default {
             this.$emit('edit', this.$props.id);
         },
         onDeleteClicked() {
-            this.$emit('delete', this.$props.delete);
+            this.$emit('delete', this.$props.id);
         }
     }
 };

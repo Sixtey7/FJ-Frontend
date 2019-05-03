@@ -16,6 +16,15 @@
             },
             save() {
                 this.account.amount = this.account.amount ? _localStringToNumber(this.account.amount) : '';
+
+                //TODO This shouldn't be needed, but need to turn a string into a boolean
+                if (this.account.dynamic === "true") {
+                    this.account.dynamic = true;
+                }
+                else {
+                    this.account.dynamic = false;
+                }
+                
                 this.$emit('save', this.account);
                 this.clearValues();
             },
@@ -80,8 +89,8 @@
                             <label for = "type">Type</label>
                             <select id = "type" v-model="account.dynamic" class = "form-control">
                                 <option disabled value="">Please Select</option>
-                                <option value = "false">Computed</option>
-                                <option value = "true">Dynamic</option>
+                                <option value = false>Computed</option>
+                                <option value = true>Dynamic</option>
                             </select>
                         </div>
                         <div class = "form-group">
