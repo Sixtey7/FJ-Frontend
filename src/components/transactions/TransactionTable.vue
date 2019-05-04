@@ -58,6 +58,7 @@ export default {
         deleteTx(txToDelete) {
             // eslint-disable-next-line
             console.log('deleting a transaction: ' + txToDelete);
+            this.emit('delete', txToDelete);
         }
     }
 }

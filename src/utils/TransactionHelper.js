@@ -18,8 +18,6 @@ class TransactionHelper {
 
      _compareTx(a, b) {
         if (a.date < b.date) {
-            //eslint-disable-next-line
-            console.log('Determined {} less than {}', a.date, b.date);
             return -1;
         }
         else if (b.date < a.date) {

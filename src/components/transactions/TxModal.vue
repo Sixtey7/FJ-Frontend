@@ -15,7 +15,8 @@
             },
             save() {
                 this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount) : '';
-                this.$emit('save', this.transaction);
+                //deep copy the value prior to emitting it
+                this.$emit('save', JSON.parse(JSON.stringify(this.transaction)));
                 this.clearValues();
             },
             clearValues() {
@@ -46,7 +47,6 @@
                 if (show) {
                     //we'll want to set the values of the modal if another prop was provided
                     if (this.txToEdit) {
-                        //TODO: This is a really hacky way to do the deep copy
                         this.transaction = JSON.parse(JSON.stringify(this.txToEdit));
                         this.transaction.date = new Date(this.transaction.date).toISOString().slice(0,10);
                     }

@@ -7,6 +7,7 @@
       :transactions = "transArray"
       :accounts = "accountsArray"
       @edit="editTx"
+      @delete="deleteTx"
     />
     <TxModal
       :show="isModalVisible"
@@ -63,7 +64,7 @@ export default {
       this.isModalVisible = false;
       this.txToShow = null;
     },
-    saveTx(transToSave) {
+    async saveTx(transToSave) {
       this.isModalVisible = false;
       this.txToShow = null;
 
@@ -71,12 +72,39 @@ export default {
       if (transToSave.transId) {
         // eslint-disable-next-line
         console.log('Saving an edited transaction: ' + JSON.stringify(transToSave));
-        this._postTransaction(transToSave);
+
+        let returnValue = await this._postTransaction(transToSave);
+
+        if (returnValue) {
+          // eslint-disable-next-line
+          console.log('got true back from posting!');
+
+          let index = this.transArray.findIndex(trans => {
+            return trans.transId === transToSave.transId;
+          });
+
+          // eslint-disable-next-line
+          console.log('got the index: ' + index);
+          if (index >= 0) {
+            this.transArray.splice(index,1,transToSave);
+
+            //TODO we might want to do this smarter, rather than redoing the entire array
+            this.transArray = new TransactionHelper().massageTransactions(this.transArray);
+          }
+        }
       }
       else {
         // eslint-disable-next-line
         console.log('Adding a new transaction: ' + JSON.stringify(transToSave));
-        this._putTransaction(transToSave);
+
+        let returnValue = await this._putTransaction(transToSave);
+
+        if (returnValue) {
+          transToSave.transId = returnValue;
+          this.transArray.push(transToSave);
+          //TODO we might want to do this smarter, rather than redoing the entire array
+          this.transArray = new TransactionHelper().massageTransactions(this.transArray);
+        }
       }
     },
     editTx(idToEdit) {
@@ -87,11 +115,18 @@ export default {
       console.log('filtered to the transaction: ' + this.txToShow.transId);
       this.isModalVisible = true;
     },
-    _putTransaction(transToPut) {
+    deleteTx(idToDelete) {
+      // eslint-disable-next-line
+      console.log('App is deleting a transaction: ' + idToDelete);
+      this._deleteTransaction(idToDelete);
+    },
+    async _putTransaction(transToPut) {
       //need to delete the empty transId to prevent the UI from trying to handle it
       delete transToPut.transId;
       let transJSON = JSON.stringify(transToPut);
-      axios({
+
+      let returnValue = '';
+      await axios({
         method: 'put',
         url: 'http://localhost:8081/transactions',
         headers: {
@@ -104,16 +139,21 @@ export default {
       .then(response => {
           // eslint-disable-next-line
           console.log('got the response: ' + JSON.stringify(response));
+          returnValue = response.data;
         })
       .catch(error => {
         // eslint-disable-next-line
         console.log('got the error: ' + error);
       });
+
+      return returnValue;
     },
-    _postTransaction(transToPost) {
+    async _postTransaction(transToPost) {
       // eslint-disable-next-line
       let transJSON = JSON.stringify(transToPost);
-      axios({
+
+      let returnValue = false;
+      await axios({
         method: 'post',
         url: 'http://localhost:8081/transactions/' + transToPost.transId,
         headers: {
@@ -125,11 +165,37 @@ export default {
       .then(response => {
         // eslint-disable-next-line
         console.log('got the response: ' + JSON.stringify(response));
+
+        if (response.status === 200) {
+          returnValue = true;
+        }
       })
       .catch(error => {
         // eslint-disable-next-line
         console.log('Got the error: ' + error);
       });
+
+      return returnValue;
+    },
+    _deleteTransaction(idToDelete) {
+      axios({
+        method: 'DELETE',
+        url: 'http://localhost:8081/transactions/' + idToDelete
+      })
+      .then(response => {
+        if (response.data === 1) {
+          // eslint-disable-next-line
+          console.log('successfully deleted a transaction!');
+        }
+        else {
+          // eslint-disable-next-line
+          console.log('got the response data: ' + JSON.stringify(response.data));
+        }
+      })
+      .catch(error => {
+        // eslint-disable-next-line
+        console.log('Got the error: ' + error);
+      })
     }
   }
 }
