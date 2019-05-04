@@ -24,8 +24,9 @@
                 else {
                     this.account.dynamic = false;
                 }
-                
-                this.$emit('save', this.account);
+
+                //deep copy the value prior to emitting it
+                this.$emit('save', JSON.parse(JSON.stringify(this.account)));
                 this.clearValues();
             },
             clearValues() {
@@ -54,7 +55,6 @@
                 if (show) {
                     //we'll want to set the values of the model if they were provided
                     if (this.accountToEdit) {
-                        //TODO: this is a really hacky way to do the deep copy
                         this.account = JSON.parse(JSON.stringify(this.accountToEdit));
                     }
                     else {

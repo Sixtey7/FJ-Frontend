@@ -62,9 +62,6 @@ export default {
                 // eslint-disable-next-line
                 console.log('Saving an edited account: ' + JSON.stringify(accountToSave));
 
-                //TODO: doing a deep copy to preserve the values, not a good practice
-                let accountToUpdate = JSON.parse(JSON.stringify(accountToSave));
-
                 let returnVal = await this._postAccount(accountToSave);
                 // eslint-disable-next-line
                 console.log('got the reponse from posting: ' + returnVal);
@@ -73,14 +70,14 @@ export default {
                     console.log('got true back from posting!');
 
                     let index = this.accountsArray.findIndex(account => {
-                         return account.id === accountToUpdate.id;
+                         return account.id === accountToSave.id;
                     });
                     if (index >= 0) {
                         // eslint-disable-next-line
                         console.log('found the index: ' + index);
                         // eslint-disable-next-line
-                        console.log('updating the account ' + JSON.stringify(accountToUpdate));
-                        this.accountsArray.splice(index,1,accountToUpdate);
+                        console.log('updating the account ' + JSON.stringify(accountToSave));
+                        this.accountsArray.splice(index,1,accountToSave);
                     }
                     else {
                         // eslint-disable-next-line
@@ -96,8 +93,6 @@ export default {
                 // eslint-disable-next-line
                 console.log('Adding a new account: ' + JSON.stringify(accountToSave));
 
-                //TODO: Added in this deep copy to get past an issue where accountToSave gets blanked, need to do this better
-                let savedAccount = JSON.parse(JSON.stringify(accountToSave));
                 let returnVal = await this._putAccount(accountToSave);
                 
                 // eslint-disable-next-line
@@ -107,10 +102,9 @@ export default {
                     console.log('got true back from posting!');
                     // eslint-disable-next-line
                     console.log('Account to save is now: ' + JSON.stringify(accountToSave));
-                    // eslint-disable-next-line
-                    console.log('saved account is now: ' + JSON.stringify(savedAccount));
-                    savedAccount.id = returnVal;
-                    this.accountsArray.push(savedAccount);
+
+                    accountToSave.id = returnVal;
+                    this.accountsArray.push(accountToSave);
                 }
                 else {
                     // eslint-disable-next-line
