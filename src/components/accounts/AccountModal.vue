@@ -34,6 +34,8 @@
                 this.account.amount = '';
                 this.account.dynamic = false;
                 this.account.notes = '';
+                this.account.id = '';
+                this.account.name = '';
             },
             setCurrency() {
                 //TODO: move this to a common location
