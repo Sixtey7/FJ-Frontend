@@ -1,7 +1,7 @@
 <template>
   <div id = "app">
     <ul class="nav nav-pills nav-fill" id = "nav" role = "tablist">
-      <li class="nav-item"><a class="nav-link active" href="#accounts" id = "accoubts-tab" data-toggle="tab" role="tab">Accounts</a></li>
+      <li class="nav-item"><a class="nav-link active" href="#accounts" id = "accounts-tab" data-toggle="tab" role="tab">Accounts</a></li>
       <li class="nav-item"><a class="nav-link" href="#transactions" id = "transactions-tab" data-toggle="tab" role="tab">Transactions</a></li>
     </ul>
 
