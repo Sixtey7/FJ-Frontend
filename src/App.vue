@@ -7,7 +7,7 @@
 
     <div class = "tab-content" id = "navContent">
       <div class = "tab-pane fade show active" id = "accounts" role = "tabpanel">
-        <AccountView />
+        <AccountView :accountModel = "accountModel" :accountsArray = "accountModel.accountsArray"  />
       </div>
       <div class = "tab-pane fade" id = "transactions" role = "tabpanel">
         <TransactionView />
@@ -19,11 +19,20 @@
 <script>
 import TransactionView from './components/transactions/TransactionView.vue';
 import AccountView from './components/accounts/AccountView.vue';
+import AccountModel from './model/AccountModel.js';
+import Vue from 'vue';
+
 export default {
   name: 'app',
   components: {
     TransactionView,
     AccountView
+  },
+  data() {
+    return {
+      logger: Vue.$log,
+      accountModel: new AccountModel(Vue.$log),
+    }
   }
 }
 
