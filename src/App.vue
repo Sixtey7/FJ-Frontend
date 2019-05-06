@@ -10,7 +10,7 @@
         <AccountView :accountModel = "accountModel" :accountsArray = "accountModel.accountsArray"  />
       </div>
       <div class = "tab-pane fade" id = "transactions" role = "tabpanel">
-        <TransactionView />
+        <TransactionView :accountsArray = "accountModel.accountsArray" />
       </div>
     </div>
   </div>
