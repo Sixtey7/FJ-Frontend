@@ -7,7 +7,7 @@
 
     <div class = "tab-content" id = "navContent">
       <div class = "tab-pane fade show active" id = "accounts" role = "tabpanel">
-        <AccountView :accountModel = "accountModel" :accountsArray = "accountModel.accountsArray"  />
+        <AccountView :accountModel = "accountModel" :accountsArray = "accountModel.accountsArray" :logger = "logger" />
       </div>
       <div class = "tab-pane fade" id = "transactions" role = "tabpanel">
         <TransactionView :accountsArray = "accountModel.accountsArray" />

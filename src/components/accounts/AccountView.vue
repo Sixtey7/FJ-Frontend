@@ -36,10 +36,12 @@ export default {
     },
     props: {
         accountModel: AccountModel,
-        accountsArray: Array
+        accountsArray: Array,
+        logger: Object
     },
     methods: {
         showModal() {
+            this.logger.debug('Opening the modal!');
             this.isModalVisible = true;
         },
         closeModal() {
