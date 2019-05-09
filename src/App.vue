@@ -10,7 +10,7 @@
         <AccountView :accountModel = "accountModel" :accountsArray = "accountModel.accountsArray" :logger = "logger" />
       </div>
       <div class = "tab-pane fade" id = "transactions" role = "tabpanel">
-        <TransactionView :accountsArray = "accountModel.accountsArray" />
+        <TransactionView :accountsArray = "accountModel.accountsArray" :txModel = "txModel" :transArray = "txModel.txArray" />
       </div>
     </div>
   </div>
@@ -20,6 +20,7 @@
 import TransactionView from './components/transactions/TransactionView.vue';
 import AccountView from './components/accounts/AccountView.vue';
 import AccountModel from './model/AccountModel.js';
+import TxModel from './model/TxModel.js';
 import Vue from 'vue';
 
 export default {
@@ -32,6 +33,7 @@ export default {
     return {
       logger: Vue.$log,
       accountModel: new AccountModel(Vue.$log),
+      txModel: new TxModel(Vue.$log)
     }
   }
 }
