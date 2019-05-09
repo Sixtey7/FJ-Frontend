@@ -137,7 +137,7 @@ class AccountModel {
     }
 
     async _deleteAccount(idToDelete) {
-        this._logger.debug('Deleting account with it' + idToDelete);
+        this._logger.debug('Deleting account with id: ' + idToDelete);
 
         let returnVal = false;
         await axios({
