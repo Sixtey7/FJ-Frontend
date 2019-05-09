@@ -23,7 +23,7 @@
                     <StringCell :stringToShow="transaction.type" />
                     <DateCell :dateToShow="transaction.date" />
                     <StringCell :stringToShow="transaction.notes" />
-                    <ButtonCell :id="transaction.transId" @edit="editTx" @delete="deleteTx" />
+                    <ButtonCell :id="transaction.id" @edit="editTx" @delete="deleteTx" />
                 </tr>
             </tbody>
         </table>

@@ -59,9 +59,9 @@ export default {
     editTx(idToEdit) {
       // eslint-disable-next-line
       console.log('App is editing a transction: ---' + idToEdit + '---');
-      this.txToShow = this.transArray.find(transaction => transaction.transId === idToEdit);
+      this.txToShow = this.transArray.find(transaction => transaction.id === idToEdit);
       // eslint-disable-next-line
-      console.log('filtered to the transaction: ' + this.txToShow.transId);
+      console.log('filtered to the transaction: ' + this.txToShow.id);
       this.isModalVisible = true;
     },
     deleteTx(idToDelete) {

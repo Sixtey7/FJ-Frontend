@@ -23,14 +23,14 @@ class TxModel {
 
     async saveTx(txToSave) {
         //determine if this is a new tx or a new one
-        if (txToSave.transId) {
+        if (txToSave.id) {
             this._logger.debug('saving an edited tx: ' + JSON.stringify(txToSave));
 
             let returnVal = await this._postTx(txToSave);
 
             if (returnVal) {
                 let index = this.txArray.findIndex(tx => {
-                    return tx.transId === txToSave.transId;
+                    return tx.id === txToSave.id;
                 });
 
                 if (index >= 0) {
@@ -51,7 +51,7 @@ class TxModel {
             let returnVal = await this._putTx(txToSave);
 
             if (returnVal) {
-                txToSave.transId = returnVal;
+                txToSave.id = returnVal;
                 this.txArray.push(txToSave);
             }
             else {
@@ -67,7 +67,7 @@ class TxModel {
 
         if (returnVal) {
             let index = this.txArray.findIndex(tx => {
-                return tx.transId === idToDelete;
+                return tx.id === idToDelete;
             });
 
             if (index >= 0) {
@@ -82,7 +82,7 @@ class TxModel {
 
     async _putTx(txToPut) {
         //need to delete the empty id to prevent the backend from trying to handle it
-        delete txToPut.transId;
+        delete txToPut.id;
         let txJSON = JSON.stringify(txToPut);
 
         let returnVal = '';
@@ -113,7 +113,7 @@ class TxModel {
 
         await axios({
             method: 'post',
-            url: TX_URL + txToPost.transId,
+            url: TX_URL + txToPost.id,
             headers: {
                 'Content-type' : 'application/json'
             },

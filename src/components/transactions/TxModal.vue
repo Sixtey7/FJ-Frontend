@@ -20,7 +20,7 @@
                 this.clearValues();
             },
             clearValues() {
-                this.transaction.transId = '';
+                this.transaction.id = '';
                 this.transaction.accountId = '';
                 this.transaction.name = '';
                 this.transaction.amount = 0;
