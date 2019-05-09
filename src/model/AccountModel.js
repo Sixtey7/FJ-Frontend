@@ -42,7 +42,7 @@ class AccountModel {
                 }
             }
             else {
-                this._logger.error('failed to post the transaction!')
+                this._logger.error('failed to post the account!')
             }
         }
         else {
@@ -130,7 +130,7 @@ class AccountModel {
             }
         })
         .catch (error => {
-            this._logger.error('got the error which attempting to post an account: ' + error);
+            this._logger.error('got an error when attempting to post an account: ' + error);
         });
 
         return returnVal;
