@@ -1,9 +1,11 @@
 import Vue from 'vue';
 import App from './App.vue';
 import VueLogger from 'vuejs-logger';
+import Vuetify from 'vuetify';
+import VueRouter from 'vue-router'
 
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap";
+import 'vuetify/dist/vuetify.min.css' // Ensure you are using css-loader
+
 
 Vue.config.productionTip = false
 
@@ -19,6 +21,8 @@ const options = {
 };
 
 Vue.use(VueLogger, options);
+Vue.use(Vuetify);
+Vue.use(VueRouter);
 
 new Vue({
   render: h => h(App),
