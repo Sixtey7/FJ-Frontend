@@ -1,30 +1,82 @@
 <template>
-  <div id = "app">
-    <ul class="nav nav-pills nav-fill" id = "nav" role = "tablist">
-      <li class="nav-item"><a class="nav-link active" href="#accounts" id = "accounts-tab" data-toggle="tab" role="tab">Accounts</a></li>
-      <li class="nav-item"><a class="nav-link" href="#transactions" id = "transactions-tab" data-toggle="tab" role="tab">Transactions</a></li>
-    </ul>
+    <v-card height="350px">
+      <v-navigation-drawer
+        v-model="drawer"
+        permanent
+        absolute
+      >
+        <v-toolbar flat class="transparent">
+          <v-list class="pa-0">
+            <v-list-tile avatar>
+              <v-list-tile-avatar>
+                <img src="https://randomuser.me/api/portraits/men/85.jpg">
+              </v-list-tile-avatar>
 
-    <div class = "tab-content" id = "navContent">
-      <div class = "tab-pane fade show active" id = "accounts" role = "tabpanel">
-        <AccountView :accountModel = "accountModel" :accountsArray = "accountModel.accountsArray" :logger = "logger" />
-      </div>
-      <div class = "tab-pane fade" id = "transactions" role = "tabpanel">
-        <TransactionView :accountsArray = "accountModel.accountsArray" :txModel = "txModel" :transArray = "txModel.txArray" />
-      </div>
-    </div>
-  </div>
+              <v-list-tile-content>
+                <v-list-tile-title>Finance Journal</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          </v-list>
+        </v-toolbar>
+
+        <v-list>
+          <v-divider></v-divider>
+          <!--v-list-group v-for="menuItem in menuItems" :value = "menuItem.active" :key = "menuItem.title"-->
+            <v-list-tile v-for = "menuItem in menuItems"
+              :key = "menuItem.title"
+              :to = "menuItem.path == '#' ? '' : menuItem.path"
+              :exact = "menuItem.exact"
+              class = "yellow--text"
+              active-class="red--text"
+            >
+              <v-list-tile-action>
+                <v-icon>{{ menuItem.icon }}</v-icon>
+              </v-list-tile-action>
+              <v-list-tile-content>
+                <v-list-tile-title>{{ menuItem.title }}</v-list-tile-title>
+              </v-list-tile-content>
+            </v-list-tile>
+          <!--/v-list-group-->
+        </v-list>
+      </v-navigation-drawer>
+    <v-content>
+      <v-container fluid>
+        <router-view></router-view>
+      </v-container>
+    </v-content>
+  </v-card>
 </template>
 
 <script>
+/* eslint-disable */
+//TODO Remove above
 import TransactionView from './components/transactions/TransactionView.vue';
 import AccountView from './components/accounts/AccountView.vue';
 import AccountModel from './model/AccountModel.js';
 import TxModel from './model/TxModel.js';
 import Vue from 'vue';
+import VueRouter from 'vue-router';
+
+
+const routes = [
+    {
+      path: '/accounts', 
+      component: AccountView,
+      props: true
+    },
+    { 
+      path: '/transactions', 
+      component: TransactionView 
+    }
+]
+
+const router = new VueRouter({
+  routes
+});
 
 export default {
   name: 'app',
+  router,
   components: {
     TransactionView,
     AccountView
@@ -33,7 +85,12 @@ export default {
     return {
       logger: Vue.$log,
       accountModel: new AccountModel(Vue.$log),
-      txModel: new TxModel(Vue.$log)
+      txModel: new TxModel(Vue.$log),
+      drawer: true,
+      menuItems: [
+        { title: 'Accounts', icon: 'dashboard', action: 'accounts', path: '/accounts' },
+        { title: 'Transactions', icon: 'question_answer', action: 'transactions', path :'/transactions'}
+      ]
     }
   }
 }

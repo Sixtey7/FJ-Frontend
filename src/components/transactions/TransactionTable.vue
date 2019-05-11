@@ -1,7 +1,9 @@
 <template>
     <div class = "trans-table">
-        <table class = "table table-bordered table-hover table-sm">
-            <thead class = "thead-dark">
+        <v-data-table
+            :items = "transactions"
+            item-key = "id">
+            <template v-slot:headers>
                 <tr>
                     <th colspan="7">Transactions</th>
                 </tr>
@@ -14,19 +16,19 @@
                     <th scope = "col">Notes</th>
                     <th scope = "col"></th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr v-for = "transaction in transactions" :key = "transaction.id">
-                    <StringCell :stringToShow="transaction.name" />
-                    <MoneyCell :amount="transaction.amount" />
-                    <MoneyCell :amount="transaction.balance" />
-                    <StringCell :stringToShow="transaction.type" />
-                    <DateCell :dateToShow="transaction.date" />
-                    <StringCell :stringToShow="transaction.notes" />
-                    <ButtonCell :id="transaction.id" @edit="editTx" @delete="deleteTx" />
+            </template>
+            <template v-slot:items="props">
+                <tr>
+                    <StringCell :stringToShow="props.item.name" />
+                    <MoneyCell :amount="props.item.amount" />
+                    <MoneyCell :amount="props.item.balance" />
+                    <StringCell :stringToShow="props.item.type" />
+                    <DateCell :dateToShow="props.item.date" />
+                    <StringCell :stringToShow="props.item.notes" />
+                    <ButtonCell :id="props.item.id" @edit="editTx" @delete="deleteTx" />
                 </tr>
-            </tbody>
-        </table>
+            </template>
+        </v-data-table>
     </div>
 </template>
 

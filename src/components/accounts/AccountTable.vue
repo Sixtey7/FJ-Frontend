@@ -1,7 +1,9 @@
 <template>
     <div class = "accounts-table">
-        <table class = "table table-bordered table-hover table-sm">
-            <thead class = "thead-dark">
+        <v-data-table
+            :items = "accounts"
+            item-key = "id">
+            <template v-slot:headers>
                 <tr>
                     <th colspan="5">Accounts</th>
                 </tr>
@@ -12,17 +14,17 @@
                     <th scope = "col">Notes</th>
                     <th scope = "col"></th>
                 </tr>
-            </thead>
-            <tbody>
-                <tr v-for = "account in accounts" :key="account.id">
-                    <StringCell :stringToShow="account.name" />
-                    <MoneyCell :amount="account.amount" />
-                    <BooleanCell :value="account.dynamic" :displayTrue="'Dynamic'" :displayFalse="'Computed'"/>
-                    <StringCell :stringToShow="account.notes" />
-                    <ButtonCell :id="account.id" @edit="editAccount" @delete="deleteAccount" />
+            </template>
+            <template v-slot:items="props">
+                <tr>
+                    <StringCell :stringToShow="props.item.name" />
+                    <MoneyCell :amount="props.item.amount" />
+                    <BooleanCell :value="props.item.dynamic" :displayTrue="'Dynamic'" :displayFalse="'Computed'"/>
+                    <StringCell :stringToShow="props.item.notes" />
+                    <ButtonCell :id="props.item.id" @edit="editAccount" @delete="deleteAccount" />
                 </tr>
-            </tbody>
-        </table>
+            </template>
+        </v-data-table>
     </div>
 </template>
 
