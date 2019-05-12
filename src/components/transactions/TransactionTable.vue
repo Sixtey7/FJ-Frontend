@@ -8,13 +8,13 @@
                     <th colspan="7">Transactions</th>
                 </tr>
                 <tr>
-                    <th scope = "col">Name</th>
-                    <th scope = "col">Amount</th>
-                    <th scope = "col">Balance</th>
-                    <th scope = "col">Type</th>
-                    <th scope = "col">Date</th>
-                    <th scope = "col">Notes</th>
-                    <th scope = "col"></th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                    <th>Balance</th>
+                    <th>Type</th>
+                    <th>Date</th>
+                    <th>Notes</th>
+                    <th></th>
                 </tr>
             </template>
             <template v-slot:items="props">

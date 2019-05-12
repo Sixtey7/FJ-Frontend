@@ -1,5 +1,5 @@
 <template>
-    <td>{{ dateToShow | formatDate }}</td>
+    <td class="text-xs-center">{{ dateToShow | formatDate }}</td>
 </template>
 
 <script>

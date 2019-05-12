@@ -1,18 +1,24 @@
 <template>
     <td>
-        <ButtonObject :id="id" :text="'E'" @clicked="onEditClicked" style="margin-right: 5px;"/>
-        <ButtonObject :id="id" :text="'D'" @clicked="onDeleteClicked" style="margin-left: 5px;"/>
+        <v-icon
+            small
+            class="mr-2"
+            @click="onEditClicked"
+        >
+            edit
+        </v-icon>
+        <v-icon
+            small
+            @click="onDeleteClicked"
+        >
+            delete
+        </v-icon>
     </td>
 </template>
 
 <script>
-import ButtonObject from './ButtonObject.vue';
-
 export default {
     name: "ButtonCell",
-    components: {
-        ButtonObject
-    },
     props: {
         id: String
     },

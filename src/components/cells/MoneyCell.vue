@@ -1,5 +1,5 @@
 <template>
-    <td>{{ amountToShow }}</td>
+    <td class="text-xs-center">{{ amountToShow }}</td>
 </template>
 
 <script>
