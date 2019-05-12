@@ -58,7 +58,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 
-const routes = [
+/*const routes = [
     {
       path: '/accounts', 
       component: AccountView,
@@ -73,10 +73,14 @@ const routes = [
 const router = new VueRouter({
   routes
 });
+*/
+function accountProps() {
+  return this
+}
 
 export default {
   name: 'app',
-  router,
+  router: new VueRouter(),
   components: {
     TransactionView,
     AccountView
@@ -92,6 +96,31 @@ export default {
         { title: 'Transactions', icon: 'question_answer', action: 'transactions', path :'/transactions'}
       ]
     }
+  },
+  created() {
+    const self = this;
+    self.$router.addRoutes([
+    {
+      path: '/accounts', 
+      component: AccountView,
+      props: (route) => ({
+        accountModel: this.accountModel,
+        accountsArray: this.accountModel.accountsArray,
+        logger: this.logger
+      })
+    },
+    {
+      path: '/transactions', 
+      component: TransactionView,
+      props: (route) => ({
+        accountsArray: this.accountModel.accountsArray,
+        txModel: this.txModel,
+        transArray: this.txModel.txArray,
+        logger: this.logger
+      }) 
+    }
+    
+    ])
   }
 }
 
