@@ -5,7 +5,8 @@
         props: ['show', 'txToEdit', 'accounts'],
         data: function() {
             return {    
-                transaction: {}
+                transaction: {},
+                menu: false
             }
         },
         methods: {
@@ -63,60 +64,60 @@
 }
 </script>
 <template>
-    <transition name = "modal">
-        <div class = "modal-mask" v-show = "show">
-            <div class = "modal-container">
-                <div class = "modal-header">
-                    <h3>New Transaction</h3>
-                </div>
-                <div class = "modal-body">
-                    <form id = "transactionForm" @submit.prevent="save">
-                        <div class = "form-group">
-                            <label for="account">Account</label>
-                            <select id = "accountId" v-model="transaction.accountId" class="form-control">
-                                <option disble value="">Please Select</option>
-                                <option v-for = "account in this.accounts" :key="account.id" :value="account.id">
-                                    {{ account.name }}
-                                </option>
-                            </select>
-                        </div>
-                        <div class = "form-group">
-                            <label for="name">Name</label>
-                            <input id = "name" v-model="transaction.name" placeholder="Name of Trans" class = "form-control">
-                        </div>
-                        <div class = "form-group">
-                            <label for = "amount">Amount $</label>
-                            <input id = "amount" v-model.number="transaction.amount" placeholder="0" type="text" class = "form-control" v-on:blur="setCurrency()" v-on:focus="onFocus()">
-                        </div>
-                        <div class = "form-group">
-                            <label for = "type">Type</label>
-                            <select id = "type" v-model="transaction.type" class = "form-control">
-                                <!--TODO: Eventually I don't want these to be all caps -->
-                                <option disabled value="">Please Select</option>
-                                <option>PLANNED</option>
-                                <option>ESTIMATE</option>
-                                <option>PENDING</option>
-                                <option>CONFIRMED</option>
-                                <option>FUTURE</option>
-                            </select>
-                        </div>
-                        <div class = "form-group">
-                            <label for = "date">Date</label>
-                            <input id = "date" v-model="transaction.date" type="date" class = "form-control">
-                        </div>
-                        <div class = "form-group">
-                            <label for = "notes">Notes</label>
-                            <textarea id = "notes" v-model="transaction.notes" placeholder = "Notes" class = "form-control"></textarea>
-                        </div>
-                        <button type="button" class = "btn btn-primary" @click="close()" style="float: left">Cancel</button>
-                        <button type="button" class = "btn btn-primary" @click="save()" style="float: right">Submit</button>
-                    </form>
-                </div>
-                <div class = "modal-footer text-right">
-                </div>
-            </div>
-        </div>
-    </transition>
+    <v-layout row justify-center>
+        <v-dialog v-model="transaction" persistent max-width="600px">
+            <v-card>
+                <v-card-title>
+                    <span class = "headline">New Transaction</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex  xs12>
+                                <v-select
+                                    :items="this.accounts"
+                                    label="Account*"
+                                    item-text="name"
+                                    item-value="id"
+                                    v-model="transaction.account"
+                                    required>
+                                </v-select>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-text-field label="Name" required></v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-menu
+                                    v-model="menu"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    lazy
+                                    transition="scale-transition"
+                                    offset-y
+                                    full-width
+                                    min-width="290px"
+                                >
+                                    <template v-slot:activator="{ on }">
+                                    <v-text-field
+                                        v-model="transaction.date"
+                                        label="Date"
+                                        prepend-icon="event"
+                                        readonly
+                                        v-on="on"
+                                    ></v-text-field>
+                                    </template>
+                                    <v-date-picker v-model="transaction.date" @input="menu = false"></v-date-picker>
+                                </v-menu>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-text-field label="Amount" prefix="$" required></v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card-text>
+            </v-card>
+        </v-dialog>
+    </v-layout>
 </template>
 <style>
 * {
