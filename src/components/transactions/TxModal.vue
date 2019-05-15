@@ -112,6 +112,19 @@
                             <v-flex xs12 sm6>
                                 <v-text-field label="Amount" prefix="$" required></v-text-field>
                             </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-select 
+                                    :items="[
+                                        'PLANNED',
+                                        'ESTIMATE',
+                                        'PENDING',
+                                        'CONFIRMED',
+                                        'FUTURE'
+                                    ]"
+                                    label="Type"
+                                    required
+                                ></v-select>
+                            </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card-text>
