@@ -65,7 +65,7 @@
 </script>
 <template>
     <v-layout row justify-center>
-        <v-dialog v-model="transaction" persistent max-width="600px">
+        <v-dialog v-model="show" persistent max-width="600px">
             <v-card>
                 <v-card-title>
                     <span class = "headline">New Transaction</span>
@@ -84,7 +84,10 @@
                                 </v-select>
                             </v-flex>
                             <v-flex xs12 sm6>
-                                <v-text-field label="Name" required></v-text-field>
+                                <v-text-field 
+                                    label="Name" 
+                                    v-model="transaction.name"
+                                    required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
                                 <v-menu
@@ -110,7 +113,11 @@
                                 </v-menu>
                             </v-flex>
                             <v-flex xs12 sm6>
-                                <v-text-field label="Amount" prefix="$" required></v-text-field>
+                                <v-text-field 
+                                    label="Amount" 
+                                    prefix="$" 
+                                    v-model = "transaction.amount"
+                                    required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
                                 <v-select 
@@ -121,13 +128,25 @@
                                         'CONFIRMED',
                                         'FUTURE'
                                     ]"
+                                    v-model="transaction.type"
                                     label="Type"
                                     required
                                 ></v-select>
                             </v-flex>
+                            <v-flex xs12>
+                                <v-text-field 
+                                    label="Notes"
+                                    v-model="transaction.notes"
+                                ></v-text-field>
+                            </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color = "blue darken-1" flat @click="close()">Close</v-btn>
+                    <v-btn color = "blue darken-1" flat @click="save()">Save</v-btn>
+                </v-card-actions>
             </v-card>
         </v-dialog>
     </v-layout>
