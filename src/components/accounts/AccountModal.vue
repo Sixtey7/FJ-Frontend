@@ -71,43 +71,56 @@
     }
 </script>
 <template>
-    <transition name = "modal">
-        <div class = "modal-mask" v-show = "show">
-            <div class = "modal-container">
-                <div class = "modal-header">
-                    <h3>New Account</h3>
-                </div>
-                <div class = "modal-body">
-                    <form id = "accountForm" @submit.prevent="save">
-                        <div class = "form-group">
-                            <label for = "name">Name</label>
-                            <input name = "name" v-model = "account.name" placeholder = "Name of Account" class = "form-control">
-                        </div>
-                        <div class = "form-group" disabled = "this.account.dynamic">
-                            <label for = "amount">Amount</label>
-                            <input id = "amount" v-model.number="account.amount" placeholder="0" type="text" class = "form-control" v-on:blur="setCurrency()" v-on:focus="onFocus()">
-                        </div>
-                        <div class = "form-group">
-                            <label for = "type">Type</label>
-                            <select id = "type" v-model="account.dynamic" class = "form-control">
-                                <option disabled value="">Please Select</option>
-                                <option value = false>Computed</option>
-                                <option value = true>Dynamic</option>
-                            </select>
-                        </div>
-                        <div class = "form-group">
-                            <label for = "notes">Notes</label>
-                            <textarea name = "notes" v-model = "account.notes" placeholder = "Notes" class = "form-control"></textarea>
-                        </div>
-                        <button type = "button" class = "btn btn-primary" @click="close()" style = "float: left">Cancel</button>
-                        <button type = "button" class = "btn btn-primary" @click="save()" style = "float: right">Submit</button>
-                    </form>
-                </div>
-                <div class = "modal-footer text-right">
-                </div>
-            </div>
-        </div>
-    </transition>
+    <v-layout row justify-center>
+        <v-dialog v-model="show" persistent max-width="600px">
+            <v-card>
+                <v-card-title>
+                    <span class="headline">New Account</span>
+                </v-card-title>
+                <v-card-text>
+                    <v-container grid-list-md>
+                        <v-layout wrap>
+                            <v-flex xs12 sm6>
+                                <v-text-field
+                                    label="Name"
+                                    v-model="account.name"
+                                    required>
+                                </v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-text-field
+                                    label="Amount"
+                                    prefix="$"
+                                    v-model="account.amount">
+                                </v-text-field>
+                            </v-flex>
+                            <v-flex xs12 sm6>
+                                <v-select
+                                    :items="[
+                                        'Computed',
+                                        'Dynamic']"
+                                    v-model="account.type"
+                                    label="Type"
+                                    required>
+                                </v-select>
+                            </v-flex>
+                            <v-flex xs12>
+                                <v-text-field 
+                                    label="Notes"
+                                    v-model="account.notes">
+                                </v-text-field>
+                            </v-flex>
+                        </v-layout>
+                    </v-container>
+                </v-card-text>
+                <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color = "blue darken-1" flat @click="close()">Close</v-btn>
+                    <v-btn color = "blue darken-1" flat @click="save()">Save</v-btn>
+                </v-card-actions>
+            </v-card>
+        </v-dialog>
+    </v-layout>
 </template>
 <style>
 * {
