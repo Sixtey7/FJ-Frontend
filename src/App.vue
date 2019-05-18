@@ -1,4 +1,5 @@
 <template>
+  <v-app>
     <v-card height="350px">
       <v-navigation-drawer
         v-model="drawer"
@@ -39,12 +40,13 @@
           <!--/v-list-group-->
         </v-list>
       </v-navigation-drawer>
-    <v-content>
-      <v-container fluid>
-        <router-view></router-view>
-      </v-container>
-    </v-content>
-  </v-card>
+      <v-content>
+        <v-container fluid>
+          <router-view></router-view>
+        </v-container>
+      </v-content>
+    </v-card>
+  </v-app>
 </template>
 
 <script>
