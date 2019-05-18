@@ -2,7 +2,9 @@
     <div class = "accounts-table">
         <v-data-table
             :items = "accounts"
-            item-key = "id">
+            item-key = "id"
+            :rows-per-page-items="[5, 10, 15, 20]"
+            :pagination.sync="pagination">
             <template v-slot:headers>
                 <tr>
                     <th colspan="5">Accounts</th>
@@ -36,6 +38,13 @@ import BooleanCell from '../cells/BooleanCell.vue';
 
 export default {
     name: "AccountTable",
+    data() {
+        return {
+            pagination: {
+                rowsPerPage: 5
+            }
+        }
+    },
     components: {
         StringCell,
         MoneyCell,

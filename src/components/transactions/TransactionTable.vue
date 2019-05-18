@@ -2,7 +2,9 @@
     <div class = "trans-table">
         <v-data-table
             :items = "transactions"
-            item-key = "id">
+            item-key = "id"
+            :rows-per-page-items="[15, 30, 50, 100]"
+            :pagination.sync="pagination">
             <template v-slot:headers>
                 <tr>
                     <th colspan="7">Transactions</th>
@@ -41,6 +43,13 @@ import ButtonCell from '../cells/ButtonCell.vue';
 
 export default {
     name: "TransactionTable",
+    data() {
+        return {
+           pagination: {
+            rowsPerPage: 30
+           }
+        }
+    },
     components: {
         DateCell,
         MoneyCell,
