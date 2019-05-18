@@ -1,11 +1,11 @@
 <template>
-  <v-app>
-    <v-card height="350px">
+  <v-app dark style = "margin-top: 0px">
+    <v-card height="100%">
       <v-navigation-drawer
         v-model="drawer"
         permanent
         absolute
-      >
+        enable-resize-watcher app dark      >
         <v-toolbar flat class="transparent">
           <v-list class="pa-0">
             <v-list-tile avatar>
@@ -41,7 +41,7 @@
         </v-list>
       </v-navigation-drawer>
       <v-content>
-        <v-container fluid>
+        <v-container>
           <router-view></router-view>
         </v-container>
       </v-content>
@@ -50,8 +50,6 @@
 </template>
 
 <script>
-/* eslint-disable */
-//TODO Remove above
 import TransactionView from './components/transactions/TransactionView.vue';
 import AccountView from './components/accounts/AccountView.vue';
 import AccountModel from './model/AccountModel.js';
@@ -59,34 +57,9 @@ import TxModel from './model/TxModel.js';
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-
-/*const routes = [
-    {
-      path: '/accounts', 
-      component: AccountView,
-      props: true
-    },
-    { 
-      path: '/transactions', 
-      component: TransactionView 
-    }
-]
-
-const router = new VueRouter({
-  routes
-});
-*/
-function accountProps() {
-  return this
-}
-
 export default {
   name: 'app',
   router: new VueRouter(),
-  components: {
-    TransactionView,
-    AccountView
-  },
   data() {
     return {
       logger: Vue.$log,
@@ -105,7 +78,7 @@ export default {
     {
       path: '/accounts', 
       component: AccountView,
-      props: (route) => ({
+      props: () => ({
         accountModel: this.accountModel,
         accountsArray: this.accountModel.accountsArray,
         logger: this.logger
@@ -114,7 +87,7 @@ export default {
     {
       path: '/transactions', 
       component: TransactionView,
-      props: (route) => ({
+      props: () => ({
         accountsArray: this.accountModel.accountsArray,
         txModel: this.txModel,
         transArray: this.txModel.txArray,
