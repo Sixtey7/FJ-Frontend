@@ -1,8 +1,5 @@
 <template>
   <div id="transaction-view">
-    <button v-on:click = "showModal" type = "button" id="add-button" class="btn btn-success">
-        Add Tx
-    </button> 
     <TransactionTable
       :transactions = "transArray"
       :accounts = "accountsArray"
@@ -16,6 +13,9 @@
       @close="closeModal"
       @save="saveTx"
     />
+    <v-btn fab dark fixed bottom right color="indigo" id = "add-button" v-on:click = "showModal">
+      <v-icon dark>add</v-icon>
+  </v-btn>
   </div>
 </template>
 
@@ -75,7 +75,4 @@ export default {
 </script>
 
 <style>
-#add-button {
-  float: right;
-}
 </style>
