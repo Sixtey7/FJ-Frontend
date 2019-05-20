@@ -6,7 +6,11 @@
         props: ['show', 'accountToEdit'],
         data: function() {
             return {
-                account: {}
+                account: {},
+                amountRules: [
+                    v => !!v || 'Amount is required',
+                    v => /^[0-9.]+$/.test(v) || 'Amount must be a number'
+                ]
             }
         },
         methods: {
@@ -91,7 +95,8 @@
                                 <v-text-field
                                     label="Amount"
                                     prefix="$"
-                                    v-model="account.amount">
+                                    v-model="account.amount"
+                                    :rules="amountRules">
                                 </v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
