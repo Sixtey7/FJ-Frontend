@@ -6,7 +6,11 @@
         data: function() {
             return {    
                 transaction: {},
-                menu: false
+                menu: false,
+                amountRules: [
+                    v => !!v || 'Amount is required',
+                    v => /^-{0,1}[0-9.]+$/.test(v) || 'Amount must be a number'
+                ]
             }
         },
         methods: {
@@ -24,7 +28,6 @@
                 this.transaction.id = '';
                 this.transaction.accountId = '';
                 this.transaction.name = '';
-                this.transaction.amount = 0;
                 this.transaction.type = '';
                 this.transaction.date = new Date().toISOString().slice(0,10);
                 this.transaction.notes = '';
@@ -117,6 +120,7 @@
                                     label="Amount" 
                                     prefix="$" 
                                     v-model = "transaction.amount"
+                                    :rules = "amountRules"
                                     required></v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>

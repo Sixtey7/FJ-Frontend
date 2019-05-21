@@ -9,7 +9,7 @@
                 account: {},
                 amountRules: [
                     v => !!v || 'Amount is required',
-                    v => /^[0-9.]+$/.test(v) || 'Amount must be a number'
+                    v => /^-{0,1}[0-9.]+$/.test(v) || 'Amount must be a number'
                 ]
             }
         },
@@ -35,7 +35,6 @@
             },
             clearValues() {
                 this.account.accountId = '';
-                this.account.amount = '';
                 this.account.dynamic = false;
                 this.account.notes = '';
                 this.account.id = '';
