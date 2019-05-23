@@ -8,8 +8,7 @@
             return {
                 account: {},
                 amountRules: [
-                    v => !!v || 'Amount is required',
-                    v => /^-{0,1}[0-9.]+$/.test(v) || 'Amount must be a number'
+                    v => !v || (/^-{0,1}[0-9.]+$/.test(v) || 'Amount must be a number')
                 ]
             }
         },
