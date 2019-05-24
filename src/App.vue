@@ -27,8 +27,8 @@
               :key = "menuItem.title"
               :to = "menuItem.path == '#' ? '' : menuItem.path"
               :exact = "menuItem.exact"
-              class = "yellow--text"
-              active-class="red--text"
+              class = "white--text"
+              active-class="yellow--text"
             >
               <v-list-tile-action>
                 <v-icon>{{ menuItem.icon }}</v-icon>
