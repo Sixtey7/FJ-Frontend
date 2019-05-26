@@ -20,6 +20,7 @@
             },
             save() {
                 this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount) : '';
+                this.transaction.date = new Date(this.transaction.date);
                 //deep copy the value prior to emitting it
                 this.$emit('save', JSON.parse(JSON.stringify(this.transaction)));
                 this.clearValues();
@@ -82,7 +83,7 @@
                                     label="Account*"
                                     item-text="name"
                                     item-value="id"
-                                    v-model="transaction.account"
+                                    v-model="transaction.accountId"
                                     required>
                                 </v-select>
                             </v-flex>
