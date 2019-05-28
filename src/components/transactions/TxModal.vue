@@ -1,5 +1,4 @@
 <script>
-    var currency = 'USD';
     export default {
         name: 'NewTxModal',
         props: ['show', 'txToEdit', 'accounts'],
@@ -19,10 +18,11 @@
                 this.$emit('close');
             },
             save() {
-                this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount) : '';
-                this.transaction.date = new Date(this.transaction.date);
+                let transactionToEmit = JSON.parse(JSON.stringify(this.transaction));
+                transactionToEmit.amount = transactionToEmit.amount ? parseFloat(transactionToEmit.amount) : '';
+                transactionToEmit.date = new Date(transactionToEmit.date);
                 //deep copy the value prior to emitting it
-                this.$emit('save', JSON.parse(JSON.stringify(this.transaction)));
+                this.$emit('save', transactionToEmit);
                 this.clearValues();
             },
             clearValues() {
@@ -33,19 +33,6 @@
                 this.transaction.date = new Date().toISOString().slice(0,10);
                 this.transaction.notes = '';
             },
-            setCurrency() {
-                  const options = {
-                    maximumFractionDigits : 2,
-                    currency              : currency,
-                    style                 : "currency",
-                    currencyDisplay       : "symbol"
-                }
-
-                this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount).toLocaleString(undefined, options) : ''
-            },
-            onFocus(){
-                this.transaction.amount = this.transaction.amount ? _localStringToNumber(this.transaction.amount) : '';
-            }
         },
         watch: {
             show: function(show) {
@@ -62,10 +49,6 @@
             }
         }
     }
-
-    function _localStringToNumber( s ){
-        return Number(String(s).replace(/[^0-9.-]+/g,""));
-}
 </script>
 <template>
     <v-layout row justify-center>
