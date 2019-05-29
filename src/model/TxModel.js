@@ -36,6 +36,8 @@ class TxModel {
                 if (index >= 0) {
                     this._logger.debug('found the index: ' + index);
                     this.txArray.splice(index, 1, txToSave);
+
+                    this.txArray = this._txHelper.massageTransactions(this.txArray);
                 }
                 else {
                     this._logger.warn('failed to find the index in the array for the tx: ' + JSON.stringify(txToSave));
@@ -53,6 +55,8 @@ class TxModel {
             if (returnVal) {
                 txToSave.id = returnVal;
                 this.txArray.push(txToSave);
+
+                this.txArray = this._txHelper.massageTransactions(this.txArray);
             }
             else {
                 this._logger.error('failed to put the transaction for: ' + JSON.stringify(txToSave));
