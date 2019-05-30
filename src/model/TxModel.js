@@ -21,6 +21,10 @@ class TxModel {
             });
     }
 
+    refreshTxs() {
+        this.txArray = this._txHelper.massageTransactions(this.txArray);
+    }
+
     async saveTx(txToSave) {
         //determine if this is a new tx or a new one
         if (txToSave.id) {
@@ -37,7 +41,7 @@ class TxModel {
                     this._logger.debug('found the index: ' + index);
                     this.txArray.splice(index, 1, txToSave);
 
-                    this.txArray = this._txHelper.massageTransactions(this.txArray);
+                    this.refreshTxs();
                 }
                 else {
                     this._logger.warn('failed to find the index in the array for the tx: ' + JSON.stringify(txToSave));
@@ -56,7 +60,7 @@ class TxModel {
                 txToSave.id = returnVal;
                 this.txArray.push(txToSave);
 
-                this.txArray = this._txHelper.massageTransactions(this.txArray);
+                this.refreshTxs();
             }
             else {
                 this._logger.error('failed to put the transaction for: ' + JSON.stringify(txToSave));
@@ -77,6 +81,8 @@ class TxModel {
             if (index >= 0) {
                 this._logger.debug('found the index: ' + index);
                 this.txArray.splice(index, 1);
+
+                this.refreshTxs();
             }
             else {
                 this._logger.warn('failed to find the index in the array for transaction: ' + idToDelete);
