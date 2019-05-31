@@ -18,15 +18,7 @@
                 this.$emit('close');
             },
             save() {
-                this.account.amount = this.account.amount ? _localStringToNumber(this.account.amount) : '';
-
-                //TODO This shouldn't be needed, but need to turn a string into a boolean
-                if (this.account.dynamic === "true") {
-                    this.account.dynamic = true;
-                }
-                else {
-                    this.account.dynamic = false;
-                }
+                this.account.amount = this.account.amount ? _localStringToNumber(this.account.amount) : 0;
 
                 //deep copy the value prior to emitting it
                 this.$emit('save', JSON.parse(JSON.stringify(this.account)));
@@ -95,15 +87,17 @@
                                     prefix="$"
                                     v-model="account.amount"
                                     :rules="amountRules"
-                                    :disabled = "account.type === 'Dynamic'">
+                                    :disabled = "account.dynamic === true">
                                 </v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
                                 <v-select
                                     :items="[
-                                        'Computed',
-                                        'Dynamic']"
-                                    v-model="account.type"
+                                        {text: 'Computed', value: false},
+                                        {text: 'Dynamic', value: true}]"
+                                    v-model="account.dynamic"
+                                    item-text = "text"
+                                    item-value = "value"
                                     label="Type"
                                     required>
                                 </v-select>
