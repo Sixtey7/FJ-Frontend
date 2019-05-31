@@ -22,7 +22,6 @@
 
         <v-list>
           <v-divider></v-divider>
-          <!--v-list-group v-for="menuItem in menuItems" :value = "menuItem.active" :key = "menuItem.title"-->
             <v-list-tile v-for = "menuItem in menuItems"
               :key = "menuItem.title"
               :to = "menuItem.path == '#' ? '' : menuItem.path"
@@ -37,7 +36,6 @@
                 <v-list-tile-title>{{ menuItem.title }}</v-list-tile-title>
               </v-list-tile-content>
             </v-list-tile>
-          <!--/v-list-group-->
         </v-list>
       </v-navigation-drawer>
       <v-content>
