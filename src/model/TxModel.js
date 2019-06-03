@@ -127,9 +127,8 @@ class TxModel {
             headers: {
                 'Content-type' : 'application/json'
             },
-            data: {
+            data: 
                 txJSON
-            }
         })
         .then(response => {
             this._logger.debug('Got the response: ' + JSON.stringify(response));
