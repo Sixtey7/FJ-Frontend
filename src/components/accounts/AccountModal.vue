@@ -87,7 +87,7 @@
                                     prefix="$"
                                     v-model="account.amount"
                                     :rules="amountRules"
-                                    :disabled = "account.dynamic === true">
+                                    :disabled = "account.dynamic === false">
                                 </v-text-field>
                             </v-flex>
                             <v-flex xs12 sm6>
