@@ -20,7 +20,7 @@
                 </tr>
             </template>
             <template v-slot:items="props">
-                <tr v-bind:class="{ completeRow: props.item.type === 'CONFIRMED' }">
+                <tr v-bind:class="{ completeRow: props.item.type === 'CONFIRMED' }" :key="props.item.id">
                     <StringCell :stringToShow="props.item.name" />
                     <MoneyCell :amount="props.item.amount" />
                     <MoneyCell :amount="props.item.balance" />
