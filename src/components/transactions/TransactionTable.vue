@@ -20,7 +20,7 @@
                 </tr>
             </template>
             <template v-slot:items="props">
-                <tr>
+                <tr v-bind:class="{ completeRow: props.item.type === 'CONFIRMED' }">
                     <StringCell :stringToShow="props.item.name" />
                     <MoneyCell :amount="props.item.amount" />
                     <MoneyCell :amount="props.item.balance" />
@@ -79,5 +79,9 @@ export default {
 html, body {
     margin: 5px;
     padding: 0;
+}
+
+.completeRow {
+    background-color: rgba(152, 251, 152, 0.4);
 }
 </style>
