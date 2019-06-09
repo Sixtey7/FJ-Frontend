@@ -46,7 +46,8 @@ export default {
     data() {
         return {
            pagination: {
-            rowsPerPage: 10
+            rowsPerPage: 15,
+            page: 3
            }
         }
     },
@@ -71,6 +72,11 @@ export default {
             console.log('deleting a transaction: ' + txToDelete);
             this.$emit('delete', txToDelete);
         }
+    },
+    updated: function() {
+        //eslint-disable-next-line
+        var page = Math.floor(this.transactions.length / 15);
+        this.pagination.page=page;
     }
 }
 </script>
