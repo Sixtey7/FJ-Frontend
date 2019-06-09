@@ -20,7 +20,7 @@
                 </tr>
             </template>
             <template v-slot:items="props">
-                <tr :key="props.item.id" v-bind:class="{ completeRow: props.item.type === 'CONFIRMED' }">
+                <tr :key="props.item.id" v-bind:class="{ completeRow: props.item.type === 'CONFIRMED', pendingRow: props.item.type === 'PENDING' }">
                     <StringCell :stringToShow="props.item.name" />
                     <MoneyCell :amount="props.item.amount" />
                     <MoneyCell :amount="props.item.balance" />
@@ -83,5 +83,10 @@ html, body {
 
 .completeRow {
     background-color: rgba(152, 251, 152, 0.4);
+}
+
+
+.pendingRow {
+     background-color: rgba(255, 255, 58, 0.4);
 }
 </style>
