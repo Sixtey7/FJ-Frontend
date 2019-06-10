@@ -1,9 +1,13 @@
 <template>
     <div class = "trans-table">
+                <div class="text-xs-center pt-2">
+            <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+        </div>
         <v-data-table
             :items = "transactions"
             item-key = "id"
             :rows-per-page-items="[10, 15, 30, 50, 100]"
+            hide-actions
             :pagination.sync="pagination">
             <template v-slot:headers>
                 <tr>
@@ -46,8 +50,7 @@ export default {
     data() {
         return {
            pagination: {
-            rowsPerPage: 15,
-            page: 3
+            rowsPerPage: 15
            }
         }
     },
@@ -71,12 +74,25 @@ export default {
             // eslint-disable-next-line
             console.log('deleting a transaction: ' + txToDelete);
             this.$emit('delete', txToDelete);
+        },
+        goToLastPage() {
+            var page = Math.ceil(this.transactions.length / this.pagination.rowsPerPage);
+            this.pagination.page=page;
         }
     },
-    updated: function() {
-        //eslint-disable-next-line
-        var page = Math.floor(this.transactions.length / 15);
-        this.pagination.page=page;
+    computed: {
+        pages () {
+            if (this.pagination.rowsPerPage == null || this.transactions.length == 0) {
+                return 0; 
+            } 
+
+            return Math.ceil(this.transactions.length / this.pagination.rowsPerPage)
+      }
+    },
+    watch: {
+        transactions: function() {
+            this.goToLastPage();
+        }
     }
 }
 </script>
