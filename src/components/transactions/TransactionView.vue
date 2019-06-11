@@ -75,4 +75,8 @@ export default {
 </script>
 
 <style>
+  #add-button{ 
+    right: 150px;
+    bottom: 75px;
+  }
 </style>
