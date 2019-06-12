@@ -1,6 +1,6 @@
 <template>
     <div class = "trans-table">
-                <div class="text-xs-center pt-2">
+        <div class="text-xs-center pt-2">
             <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
         </div>
         <v-data-table
