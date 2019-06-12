@@ -5,6 +5,7 @@
       :accounts = "accountsArray"
       @edit="editTx"
       @delete="deleteTx"
+      @add="showModal"
     />
     <TxModal
       :show="isModalVisible"
@@ -13,9 +14,6 @@
       @close="closeModal"
       @save="saveTx"
     />
-    <v-btn fab dark fixed bottom right color="indigo" id = "add-button" v-on:click = "showModal">
-      <v-icon dark>add</v-icon>
-  </v-btn>
   </div>
 </template>
 
@@ -75,8 +73,4 @@ export default {
 </script>
 
 <style>
-  #add-button{ 
-    right: 150px;
-    bottom: 75px;
-  }
 </style>
