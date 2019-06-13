@@ -1,8 +1,5 @@
 <template>
     <div class = "trans-table">
-        <div class="text-xs-center pt-2">
-            <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
-        </div>
         <v-data-table
             :items = "transactions"
             item-key = "id"
@@ -12,7 +9,7 @@
             <template v-slot:headers>
                 <tr>
                     <th>
-                        <v-btn id = "table-add-button" color="primary" dark @click="addTransactionButton">Create
+                        <v-btn id = "table-add-button" color="primary" dark @click="addTransactionButton">Add
                             <v-icon dark right>add</v-icon>
                         </v-btn>
                     </th> 
@@ -40,6 +37,9 @@
                 </tr>
             </template>
         </v-data-table>
+        <div class="text-xs-center pt-2">
+            <v-pagination v-model="pagination.page" :length="pages"></v-pagination>
+        </div>
     </div>
 </template>
 
