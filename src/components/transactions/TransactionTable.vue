@@ -8,12 +8,7 @@
             :pagination.sync="pagination">
             <template v-slot:headers>
                 <tr>
-                    <th>
-                        <v-btn id = "table-add-button" color="primary" dark @click="addTransactionButton">Add
-                            <v-icon dark right>add</v-icon>
-                        </v-btn>
-                    </th> 
-                    <th colspan="6">Transactions</th>
+                    <th colspan="7">Transactions</th>
                 </tr>
                 <tr>
                     <th>Name</th>
@@ -83,9 +78,6 @@ export default {
         goToLastPage() {
             var page = Math.ceil(this.transactions.length / this.pagination.rowsPerPage);
             this.pagination.page=page;
-        },
-        addTransactionButton() {
-            this.$emit('add');
         }
     },
     computed: {
@@ -118,9 +110,5 @@ html, body {
 
 .pendingRow {
      background-color: rgba(255, 255, 58, 0.4);
-}
-
-#table-add-button {
-    float: left;
 }
 </style>

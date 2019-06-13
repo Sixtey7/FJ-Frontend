@@ -1,11 +1,15 @@
 <template>
   <div id="transaction-view">
+    <div id = "add-button-div">
+        <v-btn id = "transaction-add-button" color = "primary" dark @click="showModal">Add
+            <v-icon dark right>add</v-icon>
+        </v-btn>
+    </div>
     <TransactionTable
       :transactions = "transArray"
       :accounts = "accountsArray"
       @edit="editTx"
       @delete="deleteTx"
-      @add="showModal"
     />
     <TxModal
       :show="isModalVisible"
@@ -73,4 +77,9 @@ export default {
 </script>
 
 <style>
+#add-button-div {
+    float: left;
+    position: absolute;
+    z-index: 100
+}
 </style>
