@@ -1,5 +1,10 @@
 <template>
     <div id = "accounts-view">
+        <div id = "add-button-div">
+            <v-btn id = "account-add-button" color = "primary" dark @click="showModal">Add
+                <v-icon dark right>add</v-icon>
+            </v-btn>
+        </div>
         <AccountTable
             :accounts = "accountsArray"
             @edit = "editAccount"
@@ -11,9 +16,6 @@
             @close = "closeModal"
             @save = "saveAccount"
         />
-        <v-btn fab dark fixed bottom right color="indigo" id = "add-account-button" v-on:click = "showModal">
-            <v-icon dark>add</v-icon>
-        </v-btn>
     </div>
 </template>
 
@@ -71,4 +73,9 @@ export default {
 </script>
 
 <style>
+#add-button-div {
+    float: left;
+    position: absolute;
+    z-index: 100
+}
 </style>
