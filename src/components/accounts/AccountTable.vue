@@ -18,7 +18,7 @@
                 </tr>
             </template>
             <template v-slot:items="props">
-                <tr>
+                <tr @click="editAccount(props.item.id)">
                     <StringCell :stringToShow="props.item.name" />
                     <MoneyCell :amount="props.item.amount" />
                     <BooleanCell :value="props.item.dynamic" :displayTrue="'Dynamic'" :displayFalse="'Computed'"/>

@@ -21,7 +21,7 @@
                 </tr>
             </template>
             <template v-slot:items="props">
-                <tr :key="props.item.id" v-bind:class="{ completeRow: props.item.type === 'CONFIRMED', pendingRow: props.item.type === 'PENDING' }">
+                <tr :key="props.item.id" v-bind:class="{ completeRow: props.item.type === 'CONFIRMED', pendingRow: props.item.type === 'PENDING' }" @click="editTx(props.item.id)">
                     <StringCell :stringToShow="props.item.name" />
                     <MoneyCell :amount="props.item.amount" />
                     <MoneyCell :amount="props.item.balance" />
