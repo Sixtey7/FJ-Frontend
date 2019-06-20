@@ -52,7 +52,7 @@
 </script>
 <template>
     <v-layout row justify-center>
-        <v-dialog v-model="show" persistent max-width="600px">
+        <v-dialog v-model="show" max-width="600px">
             <v-card>
                 <v-card-title>
                     <span class = "headline">New Transaction</span>
