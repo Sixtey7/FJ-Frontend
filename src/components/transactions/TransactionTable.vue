@@ -3,7 +3,6 @@
         <v-data-table
             :items = "transactions"
             item-key = "id"
-            :rows-per-page-items="[10, 15, 30, 50, 100]"
             hide-actions
             :pagination.sync="pagination">
             <template v-slot:headers>
@@ -50,7 +49,7 @@ export default {
     data() {
         return {
            pagination: {
-            rowsPerPage: 15
+            rowsPerPage: 30
            }
         }
     },
