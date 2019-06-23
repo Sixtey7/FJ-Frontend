@@ -32,7 +32,9 @@ class TxModel {
 
             let returnVal = await this._postTx(txToSave);
 
-            if (returnVal) {
+            this._logger.debug('got the return data: ' + JSON.stringify(returnVal));
+
+            if (returnVal.success) {
                 let index = this.txArray.findIndex(tx => {
                     return tx.id === txToSave.id;
                 });
@@ -119,7 +121,7 @@ class TxModel {
     async _postTx(txToPost) {
         let txJSON = JSON.stringify(txToPost);
 
-        let returnVal = false;
+        let returnVal = undefined;
 
         await axios({
             method: 'post',
@@ -134,7 +136,7 @@ class TxModel {
             this._logger.debug('Got the response: ' + JSON.stringify(response));
             if (response.status === 200) {
                 this._logger.debug('Successfully posted the transaction!');
-                returnVal = true;
+                returnVal = response.data;
             }
             else {
                 this.logger.warn('got a negative status back from posting a transaction: ' + txJSON + ' status was: ' + response.status);
