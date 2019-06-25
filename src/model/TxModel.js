@@ -35,19 +35,22 @@ class TxModel {
             this._logger.debug('got the return data: ' + JSON.stringify(returnVal));
 
             if (returnVal.success) {
-                let index = this.txArray.findIndex(tx => {
-                    return tx.id === txToSave.id;
+                returnVal.transactions.forEach(trans => {                        
+                    let index = this.txArray.findIndex(trans => {
+                        return trans.id === txToSave.id;
+                    });
+
+                    if (index >= 0) {
+                        this._logger.debug('found the index: ' + index);
+                        this.txArray.splice(index, 1, trans);
+
+                    }
+                    else {
+                        this._logger.warn('failed to find the index in the array for the tx: ' + JSON.stringify(trans));
+                    }
+
                 });
-
-                if (index >= 0) {
-                    this._logger.debug('found the index: ' + index);
-                    this.txArray.splice(index, 1, txToSave);
-
-                    this.refreshTxs();
-                }
-                else {
-                    this._logger.warn('failed to find the index in the array for the tx: ' + JSON.stringify(txToSave));
-                }
+                this.refreshTxs();
             }
             else {
                 this._logger.error('failed to post the transaction!');
