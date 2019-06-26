@@ -1,15 +1,18 @@
 import axios from 'axios';
+import AccountHelper from '../utils/AccountHelper';
 
 const ACCOUNT_URL = 'http://localhost:8081/accounts/'
 
 class AccountModel {
 
     accountsArray;
+    _accountHelper;
     _logger;
 
     constructor(logger) {
         this._logger = logger;
         this._logger.debug('running accounds model constructor!');
+        this._accountHelper = new AccountHelper(logger);
         this.accountsArray = new Array();
 
         axios
@@ -29,17 +32,7 @@ class AccountModel {
             let returnVal = await this._postAccount(accountToSave);
 
             if (returnVal) {
-                let index = this.accountsArray.findIndex(account => {
-                    return account.id === accountToSave.id;
-                });
-
-                if (index >= 0) {
-                    this._logger.debug('found the index: ' + index);
-                    this.accountsArray.splice(index, 1, accountToSave);
-                }
-                else {
-                    this._logger.warn('failed to find the index in the array for account: ' + JSON.stringify(accountToSave));
-                }
+                this.accountsArray = await this._accountHelper.mergeAccountIntoArray(accountToSave, this.accountsArray);
             }
             else {
                 this._logger.error('failed to post the account!')
