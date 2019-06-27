@@ -88,6 +88,7 @@ export default {
       props: () => ({
         accountsArray: this.accountModel.accountsArray,
         txModel: this.txModel,
+        acctModel: this.accountModel,
         transArray: this.txModel.txArray,
         logger: this.logger
       }) 

@@ -25,7 +25,7 @@
 import TransactionTable from './TransactionTable.vue';
 import TxModal from './TxModal.vue';
 import TxModel from '../../model/TxModel.js';
-
+import AccountModel from '../../model/AccountModel';
 export default {
   name: 'TransactionView',
   components: {
@@ -42,6 +42,7 @@ export default {
   props: {
     accountsArray: Array,
     txModel: TxModel,
+    acctModel: AccountModel,
     transArray: Array
   },
   methods: {
@@ -56,7 +57,14 @@ export default {
       this.isModalVisible = false;
       this.txToShow = null;
 
-      this.txModel.saveTx(transToSave);
+      let acctsToUpdate = await this.txModel.saveTx(transToSave);
+
+      acctsToUpdate.forEach(acct => {
+        //eslint-disable-next-line
+          console.log('need to handle the account: ' + JSON.stringify(acct));
+        this.acctModel.updateAccountInCache(acct);
+      });
+
     },
     editTx(idToEdit) {
       // eslint-disable-next-line

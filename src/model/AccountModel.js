@@ -152,6 +152,10 @@ class AccountModel {
 
         return returnVal;
     }
+
+    async updateAccountInCache(acctToUpdate) {
+        this.accountsArray = await this._accountHelper.mergeAccountIntoArray(acctToUpdate, this.accountsArray);
+    }
 }
 
 export default AccountModel;

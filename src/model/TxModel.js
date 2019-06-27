@@ -6,6 +6,7 @@ const TX_URL = 'http://localhost:8081/transactions/';
 class TxModel {
     txArray;
     _txHelper;
+    _acctHelper;
     _logger;
 
     constructor(logger) {
@@ -50,7 +51,10 @@ class TxModel {
                     }
 
                 });
-                this.refreshTxs();
+
+                this.refreshTxs(); 
+
+                return returnVal.accounts;
             }
             else {
                 this._logger.error('failed to post the transaction!');
