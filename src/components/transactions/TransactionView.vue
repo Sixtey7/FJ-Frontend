@@ -26,6 +26,8 @@ import TransactionTable from './TransactionTable.vue';
 import TxModal from './TxModal.vue';
 import TxModel from '../../model/TxModel.js';
 import AccountModel from '../../model/AccountModel';
+import Vue from 'vue';
+
 export default {
   name: 'TransactionView',
   components: {
@@ -43,7 +45,8 @@ export default {
     accountsArray: Array,
     txModel: TxModel,
     acctModel: AccountModel,
-    transArray: Array
+    transArray: Array,
+    logger: Vue.log
   },
   methods: {
     showModal() {
@@ -57,26 +60,25 @@ export default {
       this.isModalVisible = false;
       this.txToShow = null;
 
+      //call the model to perform the update
       let acctsToUpdate = await this.txModel.saveTx(transToSave);
 
+      //update the accounts that were affected by the transaction change
       acctsToUpdate.forEach(acct => {
-        //eslint-disable-next-line
-          console.log('need to handle the account: ' + JSON.stringify(acct));
+        this.logger.debug('need to handle the account: ' + JSON.stringify(acct));
         this.acctModel.updateAccountInCache(acct);
       });
 
     },
     editTx(idToEdit) {
-      // eslint-disable-next-line
-      console.log('App is editing a transction: ---' + idToEdit + '---');
+      this.logger.debug('App is editing a transction: ---' + idToEdit + '---');
       this.txToShow = this.transArray.find(transaction => transaction.id === idToEdit);
-      // eslint-disable-next-line
-      console.log('filtered to the transaction: ' + this.txToShow.id);
+
+      this.logger.debug('filtered to the transaction: ' + this.txToShow.id);
       this.isModalVisible = true;
     },
     deleteTx(idToDelete) {
-      // eslint-disable-next-line
-      console.log('App is deleting a transaction: ' + idToDelete);
+      this.logger.debug('App is deleting a transaction: ' + idToDelete);
       this.txModel.deleteTx(idToDelete);
     }
   }
