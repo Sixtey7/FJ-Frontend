@@ -43,6 +43,7 @@ import DateCell from '../cells/DateCell.vue';
 import MoneyCell from '../cells/MoneyCell.vue';
 import StringCell from '../cells/StringCell.vue';
 import ButtonCell from '../cells/ButtonCell.vue';
+import Vue from 'vue';
 
 export default {
     name: "TransactionTable",
@@ -61,17 +62,16 @@ export default {
     },
     props: {
         transactions: Array,
-        accounts: Array
+        accounts: Array,
+        logger: Vue.log
     },
     methods: {
         editTx(txToEdit) {
-            // eslint-disable-next-line
-            console.log('editing a transaction: ' + txToEdit);
+            this.logger.info('editing a transaction: ' + txToEdit);
             this.$emit('edit', txToEdit);
         },
         deleteTx(txToDelete) {
-            // eslint-disable-next-line
-            console.log('deleting a transaction: ' + txToDelete);
+            this.logger.info('deleting a transaction: ' + txToDelete);
             this.$emit('delete', txToDelete);
         },
         goToLastPage() {

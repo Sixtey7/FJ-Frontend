@@ -8,6 +8,7 @@
     <TransactionTable
       :transactions = "transArray"
       :accounts = "accountsArray"
+      :logger = "logger"
       @edit="editTx"
       @delete="deleteTx"
     />
