@@ -65,8 +65,8 @@ class TxModel {
 
             let returnVal = await this._putTx(txToSave);
 
-            if (returnVal) {
-                txToSave.id = returnVal;
+            if (returnVal.success) {
+                txToSave.id = returnVal.transactions[0];
                 this.txArray.push(txToSave);
 
                 this.refreshTxs();
