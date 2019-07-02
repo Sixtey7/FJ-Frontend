@@ -65,11 +65,12 @@ export default {
       let acctsToUpdate = await this.txModel.saveTx(transToSave);
 
       //update the accounts that were affected by the transaction change
-      acctsToUpdate.forEach(acct => {
-        this.logger.debug('need to handle the account: ' + JSON.stringify(acct));
-        this.acctModel.updateAccountInCache(acct);
-      });
-
+      if (typeof acctsToUpdate !== 'undefined') {
+        acctsToUpdate.forEach(acct => {
+          this.logger.debug('need to handle the account: ' + JSON.stringify(acct));
+          this.acctModel.updateAccountInCache(acct);
+        });
+      }
     },
     editTx(idToEdit) {
       this.logger.debug('App is editing a transction: ---' + idToEdit + '---');
