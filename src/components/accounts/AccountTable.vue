@@ -35,6 +35,7 @@ import StringCell from '../cells/StringCell.vue';
 import MoneyCell from '../cells/MoneyCell.vue';
 import ButtonCell from '../cells/ButtonCell.vue';
 import BooleanCell from '../cells/BooleanCell.vue';
+import Vue from 'vue';
 
 export default {
     name: "AccountTable",
@@ -52,18 +53,17 @@ export default {
         BooleanCell
     },
     props: {
-        accounts: Array
+        accounts: Array,
+        logger: Vue.log
     },
     methods: {
         editAccount(accountToEdit) {
-            // eslint-disable-next-line
-            console.log('editing an account: ' + accountToEdit);
+            this.logger.info('editing an account: ' + accountToEdit);
             this.$emit('edit', accountToEdit);
 
         },
         deleteAccount(accountToDelete) {
-            // eslint-disable-next-line
-            console.log('deleting an account: ' + accountToDelete);
+            this.logger.info('deleting an account: ' + accountToDelete);
             this.$emit('delete', accountToDelete);
         }
     }

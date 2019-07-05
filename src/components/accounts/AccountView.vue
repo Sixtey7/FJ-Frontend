@@ -7,6 +7,7 @@
         </div>
         <AccountTable
             :accounts = "accountsArray"
+            :logger = "logger"
             @edit = "editAccount"
             @delete = "deleteAccount"
         />
