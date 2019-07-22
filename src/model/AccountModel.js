@@ -6,6 +6,7 @@ const ACCOUNT_URL = 'http://localhost:8081/accounts/'
 class AccountModel {
 
     accountsArray;
+    accountsTotal;
     _accountHelper;
     _logger;
 
@@ -21,6 +22,8 @@ class AccountModel {
                 this.accountsArray = response.data;
                 
                 this._logger.debug('got ' + this.accountsArray.length + ' accounts!');
+
+                this.determineTotal();
             });
     }
 
@@ -33,6 +36,8 @@ class AccountModel {
 
             if (returnVal) {
                 this.accountsArray = await this._accountHelper.mergeAccountIntoArray(accountToSave, this.accountsArray);
+
+                this.determineTotal();
             }
             else {
                 this._logger.error('failed to post the account!')
@@ -46,6 +51,8 @@ class AccountModel {
             if (returnVal) {
                 accountToSave.id = returnVal;
                 this.accountsArray.push(accountToSave);
+
+                this.determineTotal();
             }
             else {
                 this._logger.error('failed to put the account for: ' + JSON.stringify(accountToSave));
@@ -66,6 +73,8 @@ class AccountModel {
             if (index >= 0) {
                 this._logger.debug('found the index: ' + index);
                 this.accountsArray.splice(index, 1);
+
+                this.determineTotal();
             }
             else {
                 this._logger.warn('failed to find the index in the array for account: ' + idToDelete);
@@ -155,6 +164,18 @@ class AccountModel {
 
     async updateAccountInCache(acctToUpdate) {
         this.accountsArray = await this._accountHelper.mergeAccountIntoArray(acctToUpdate, this.accountsArray);
+    }
+
+    async determineTotal() {
+        this._logger.debug('Detemrining the total for all accounts');
+        let total = 0;
+        this.accountsArray.forEach(account => {
+            total += account.amount;
+        });
+
+        this.accountsTotal = total.toFixed(2);
+        this._logger.debug('Calculated the value: ' + this.accountsTotal);
+
     }
 }
 
