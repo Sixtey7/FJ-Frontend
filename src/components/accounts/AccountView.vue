@@ -11,6 +11,7 @@
             @edit = "editAccount"
             @delete = "deleteAccount"
         />
+        <h3 id = "totalHeader">Total: ${{ accountTotal }}</h3>
         <AccountModal
             :show = "isModalVisible"
             :accountToEdit = "accountToShow"
@@ -40,6 +41,7 @@ export default {
     props: {
         accountModel: AccountModel,
         accountsArray: Array,
+        accountTotal: Number,
         logger: Object
     },
     methods: {
@@ -78,5 +80,10 @@ export default {
     float: left;
     position: absolute;
     z-index: 100
+}
+
+#totalHeader {
+    float: right;
+    margin-right: 50px;
 }
 </style>

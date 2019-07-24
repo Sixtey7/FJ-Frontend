@@ -79,6 +79,7 @@ export default {
       props: () => ({
         accountModel: this.accountModel,
         accountsArray: this.accountModel.accountsArray,
+        accountTotal: this.accountModel.accountsTotal,
         logger: this.logger
       })
     },
