@@ -60,14 +60,12 @@ export default {
             this.accountModel.saveAccount(accountToSave);
         },
         editAccount(idToEdit) {
-            // eslint-disable-next-line
             this.accountToShow = this.accountsArray.find(account => account.id === idToEdit);
 
             this.isModalVisible = true;
         },
         deleteAccount(idToDelete) {
-            // eslint-disable-next-line
-            console.log('App is deleting an account: ' + idToDelete);
+            this.logger.debug('App is deleting an account: ' + idToDelete);
 
             this.accountModel.deleteAccount(idToDelete);
         }
