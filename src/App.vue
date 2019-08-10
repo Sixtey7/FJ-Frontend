@@ -50,6 +50,7 @@
 <script>
 import TransactionView from './components/transactions/TransactionView.vue';
 import AccountView from './components/accounts/AccountView.vue';
+import AdminView from './components/admin/AdminView.vue';
 import AccountModel from './model/AccountModel.js';
 import TxModel from './model/TxModel.js';
 import Vue from 'vue';
@@ -66,7 +67,8 @@ export default {
       drawer: true,
       menuItems: [
         { title: 'Accounts', icon: 'dashboard', action: 'accounts', path: '/accounts' },
-        { title: 'Transactions', icon: 'question_answer', action: 'transactions', path :'/transactions'}
+        { title: 'Transactions', icon: 'question_answer', action: 'transactions', path :'/transactions'},
+        { title: 'Admin', icon: 'rowing', action: 'admin', path: '/admin'}
       ]
     }
   },
@@ -93,7 +95,14 @@ export default {
         transArray: this.txModel.txArray,
         logger: this.logger
       }) 
-    }
+    },
+    {
+        path: '/admin',
+        component: AdminView,
+        props: () => ({
+          logger: this.logger
+        })
+      }
     
     ])
   }
