@@ -8,10 +8,7 @@
                 </v-btn>
             </div>
             <div id = "upload-all-button-div">
-                <v-btn id = "upload-all-button" color = "primary" dark @click="$refs.uploadAllFile.click()">Upload!
-                    <v-icon dark right>cloud_upload</v-icon>
-                </v-btn>
-                <input type = "file" ref = "uploadAllFile" @change = "uploadAllCSV" v-show="false"/>
+                <UploadButton @upload="uploadAll" />
             </div>
         </div>
         <div id = "download-accounts">
@@ -24,9 +21,13 @@
 </template>
 <script>
 import axios from 'axios';
+import UploadButton from './UploadButton.vue';
 
 export default {
     name: 'AdminView',
+    components: {
+        UploadButton
+    },
     props: {
         logger: Object
     },
@@ -38,28 +39,27 @@ export default {
                 method: 'GET',
                 responseType: 'blob', // important
                 }).then((response) => {
-                const url = window.URL.createObjectURL(new Blob([response.data]));
-                const link = document.createElement('a');
-                link.href = url;
-                link.setAttribute('download', 'transactions.csv');
-                document.body.appendChild(link);
-                link.click();
-            });
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'transactions.csv');
+                    document.body.appendChild(link);
+                    link.click();
+                }
+            );
         },
-        uploadAllCSV() {
-            /*let formData = new FormData();
-            formData.append('file', this.uploadAllFile);
-
+        uploadAll(textFromFile) {
+            var vm = this;
             axios.put('http://localhost:8081/fjservice/cleanAndImport',
-                formData,
+                textFromFile,
                 {
                     headers: {
                         'Content-type': 'text/plain'
                     }
                 }
-            ).then(function() {
-                this.logger.debug('Successfully posted file!');
-            });*/
+                ).then(function() {
+                    vm.logger.debug('Successfully posted file!');
+            });
         }
     }
 }
