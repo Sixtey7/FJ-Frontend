@@ -3,9 +3,7 @@
         <div id = "all">
             <h2>All</h2>
             <div id = "download-all-button-div">
-                <v-btn id = "download-all-button" color = "primary" dark @click="downloadAllCSV">Download!
-                    <v-icon dark right>cloud_download</v-icon>
-                </v-btn>
+                <DownloadButton :url = "dlAllURL" :logger = "logger" />
             </div>
             <div id = "upload-all-button-div">
                 <UploadButton @upload="uploadAll" />
@@ -21,12 +19,19 @@
 </template>
 <script>
 import axios from 'axios';
+import DownloadButton from './DownloadButton';
 import UploadButton from './UploadButton.vue';
 
 export default {
     name: 'AdminView',
     components: {
+        DownloadButton,
         UploadButton
+    },
+    data() {
+        return {
+            dlAllURL: "http://localhost:8081/fjservice/csvFile"
+        }
     },
     props: {
         logger: Object
