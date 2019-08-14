@@ -100,7 +100,9 @@ export default {
         path: '/admin',
         component: AdminView,
         props: () => ({
-          logger: this.logger
+          logger: this.logger,
+          txModel: this.txModel,
+          acctModel: this.accountModel
         })
       }
     
