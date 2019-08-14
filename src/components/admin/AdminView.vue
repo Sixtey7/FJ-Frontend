@@ -34,7 +34,9 @@ export default {
         }
     },
     props: {
-        logger: Object
+        logger: Object,
+        txModel: Object,
+        acctModel: Object
     },
     methods: {
         uploadAll(textFromFile) {
@@ -46,7 +48,12 @@ export default {
                         'Content-type': 'text/plain'
                     }
                 }
-                ).then(function() {
+                ).then(function(rsp) {
+                    vm.logger.debug("Got the response: " + JSON.stringify(rsp.data));
+                    
+                    //TODO: Need to update the data here
+                    vm.acctModel.clearAndUpdateCache(rsp.data.accounts);
+                    vm.txModel.clearAndUpdateCache(rsp.data.transactions);
                     vm.logger.debug('Successfully posted file!');
             });
         }

@@ -166,6 +166,10 @@ class AccountModel {
         this.accountsArray = await this._accountHelper.mergeAccountIntoArray(acctToUpdate, this.accountsArray);
     }
 
+    async clearAndUpdateCache(acctsToUpdate) {
+        this.accountsArray = acctsToUpdate;
+    }
+
     async determineTotal() {
         this._logger.debug('Detemrining the total for all accounts');
         let total = 0;

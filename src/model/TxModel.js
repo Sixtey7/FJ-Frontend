@@ -181,6 +181,10 @@ class TxModel {
 
         return returnVal;
     }
+
+    async clearAndUpdateCache(newTxArray) {
+        this.txArray = this._txHelper.massageTransactions(newTxArray);
+    }
 }
 
 export default TxModel;
