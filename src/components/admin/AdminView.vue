@@ -51,9 +51,11 @@ export default {
                 ).then(function(rsp) {
                     vm.logger.debug("Got the response: " + JSON.stringify(rsp.data));
                     
-                    //TODO: Need to update the data here
+                    //Update the data in the models
                     vm.acctModel.clearAndUpdateCache(rsp.data.accounts);
                     vm.txModel.clearAndUpdateCache(rsp.data.transactions);
+
+                    //TODO: Need to raise a snackbar here
                     vm.logger.debug('Successfully posted file!');
             });
         }
