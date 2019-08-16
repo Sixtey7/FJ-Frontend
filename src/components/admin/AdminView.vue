@@ -15,6 +15,18 @@
         <div id = "download-accounts">
             <h2>Transactions</h2>
         </div>
+        <v-snackbar
+            v-model="snackVisible"
+        >
+            {{ snackbarText }}
+            <v-btn
+                color="gray"
+                text
+                @click="snackVisible = false"
+            >
+                Close
+            </v-btn>
+        </v-snackbar>
     </div>
 </template>
 <script>
@@ -30,7 +42,9 @@ export default {
     },
     data() {
         return {
-            dlAllURL: "http://localhost:8081/fjservice/csvFile"
+            dlAllURL: "http://localhost:8081/fjservice/csvFile",
+            snackVisible: false,
+            snackbarText: ""
         }
     },
     props: {
@@ -55,7 +69,9 @@ export default {
                     vm.acctModel.clearAndUpdateCache(rsp.data.accounts);
                     vm.txModel.clearAndUpdateCache(rsp.data.transactions);
 
-                    //TODO: Need to raise a snackbar here
+                    //Raise a snackbar here
+                    vm.snackbarText = "File Uploaded";
+                    vm.snackVisible = true;
                     vm.logger.debug('Successfully posted file!');
             });
         }
