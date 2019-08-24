@@ -12,11 +12,13 @@ export default {
     name: 'DownloadButton',
     props: {
         url: String,
-        logger: Object
+        logger: Object,
+        fileName: String
     },
     methods: {
         downloadCSV() {
             this.logger.debug("Downloading CSV from " + this.url);
+            var vm = this;
             axios({
                 url: this.url,
                 method: 'GET',
@@ -25,7 +27,7 @@ export default {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
                 const link = document.createElement('a');
                 link.href = url;
-                link.setAttribute('download', 'transactions.csv');
+                link.setAttribute('download', vm.fileName);
                 document.body.appendChild(link);
                 link.click();
             });
