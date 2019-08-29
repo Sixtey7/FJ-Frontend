@@ -12,7 +12,7 @@
         <div id = "download-accounts" class = "button-section">
             <h2>Accounts</h2>
             <div id = "download-acct-button-div" class = "download-button">
-                <DownloadButton :url = "dlAcctURL" :logger = "logger" :fileName = "dlTxFileName"/>
+                <DownloadButton :url = "dlAcctURL" :logger = "logger" :fileName = "dlAcctFileName"/>
             </div>
             <div id = "upload-acct-button-div" class = "upload-button">
                 <UploadButton @upload="uploadAcct" />
