@@ -33,5 +33,12 @@ yarn run test
 yarn run lint
 ```
 
+## Docker
+# Building
+* docker build -t agt-frontend:latest .
+
+# Running
+* docker run --name agt-frontend -it -p 8080:8080 --rm agt-frontend:latest
+
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
