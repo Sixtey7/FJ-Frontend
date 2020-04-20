@@ -62,8 +62,8 @@ export default {
   data() {
     return {
       logger: Vue.$log,
-      accountModel: new AccountModel(Vue.$log),
-      txModel: new TxModel(Vue.$log),
+      accountModel: new AccountModel(Vue.$log, this.backendHost),
+      txModel: new TxModel(Vue.$log, this.backendHost),
       drawer: true,
       menuItems: [
         { title: 'Accounts', icon: 'dashboard', action: 'accounts', path: '/accounts' },
@@ -107,7 +107,10 @@ export default {
       }
     
     ])
-  }
+  },
+  beforeCreate() {
+    this.backendHost = process.env.VUE_APP_BACKEND_HOSTNAME + ':' + process.env.VUE_APP_BACKEND_PORT;
+  },
 }
 
 </script>

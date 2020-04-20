@@ -1,7 +1,7 @@
 import axios from 'axios';
 import TransactionHelper from '../utils/TransactionHelper';
 
-const TX_URL = 'http://localhost:8081/transactions/';
+const urlSuffix = '/transactions/';
 
 class TxModel {
     txArray;
@@ -9,14 +9,15 @@ class TxModel {
     _acctHelper;
     _logger;
 
-    constructor(logger) {
+    constructor(logger, backendHost) {
         this._logger = logger;
         this._logger.debug('standing up the Transaction Model!');
+        this.backendURL = "http://" + backendHost + urlSuffix
         this._txHelper = new TransactionHelper();
         this.txArray = new Array();
 
         axios
-            .get(TX_URL)
+            .get(this.backendURL)
             .then(response => {
                 this.txArray = this._txHelper.massageTransactions(response.data);
             });
@@ -107,7 +108,7 @@ class TxModel {
         let returnVal = '';
         await axios({
             method: 'put',
-            url: TX_URL,
+            url: this.backendURL,
             headers: {
                 'Content-type': 'application/json'
             },
@@ -132,7 +133,7 @@ class TxModel {
 
         await axios({
             method: 'post',
-            url: TX_URL + txToPost.id,
+            url: this.backendURL + txToPost.id,
             headers: {
                 'Content-type' : 'application/json'
             },
@@ -164,7 +165,7 @@ class TxModel {
 
         await axios({
             method: 'delete',
-            url: TX_URL + idToDelete
+            url: this.backendURL + idToDelete
         })
         .then(response => {
             this._logger.debug('got a return value of: ' + response.data);
