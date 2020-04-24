@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AccountHelper from '../utils/AccountHelper';
 
-const ACCOUNT_URL = 'http://localhost:8081/accounts/'
+const urlSuffix = '/accounts/';
 
 class AccountModel {
 
@@ -10,14 +10,15 @@ class AccountModel {
     _accountHelper;
     _logger;
 
-    constructor(logger) {
+    constructor(logger, backendHost) {
         this._logger = logger;
         this._logger.debug('running accounds model constructor!');
+        this.backendURL = 'http://' + backendHost + urlSuffix;
         this._accountHelper = new AccountHelper(logger);
         this.accountsArray = new Array();
 
         axios
-            .get(ACCOUNT_URL)
+            .get(this.backendURL)
             .then(response => {
                 this.accountsArray = response.data;
                 
@@ -90,7 +91,7 @@ class AccountModel {
         let returnVal = '';
         await axios({
             method: 'put',
-            url: ACCOUNT_URL,
+            url: this.backendURL,
             headers: {
                 'Content-type': 'application/json'
             },
@@ -114,7 +115,7 @@ class AccountModel {
         let returnVal = false;
         await axios({
             method: 'post',
-            url: ACCOUNT_URL + accountToPost.id,
+            url: this.backendURL + accountToPost.id,
             headers: {
                 'Content-type' : 'application/json'
             },
@@ -144,7 +145,7 @@ class AccountModel {
         let returnVal = false;
         await axios({
             method: 'DELETE',
-            url: ACCOUNT_URL + idToDelete
+            url: this.backendURL + idToDelete
         })
         .then(response => {
             this._logger.debug('Got a return value of ' + response.data);
