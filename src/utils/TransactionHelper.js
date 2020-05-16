@@ -34,6 +34,21 @@ class TransactionHelper {
             transaction.balance = currentBalance;
         })
     }
+
+    /**
+     * Filters the provided list of transactions and returns all transactions newer than the provided date
+     * @param {Array} txList array containing the list of transactions
+     * @param {Date} dateFilter the date that should be used in the filter
+     */
+    filterTxListFromDate(txList, dateFilter) {
+        this._logger.debug('Filting transaction list from date: ' + dateFilter);
+
+        let returnArray = new Array(transaction => {
+            transaction.date > dateFilter
+        });
+
+        return returnArray;
+    }
 }
 
 export default TransactionHelper;
