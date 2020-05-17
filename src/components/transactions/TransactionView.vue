@@ -28,6 +28,7 @@ import TxModal from './TxModal.vue';
 import TxModel from '../../model/TxModel.js';
 import AccountModel from '../../model/AccountModel';
 import Vue from 'vue';
+import TransactionHelper from '../../utils/TransactionHelper';
 
 export default {
   name: 'TransactionView',
@@ -39,7 +40,10 @@ export default {
     return {
       txs: null  ,
       isModalVisible: false,
-      txToShow: null
+      txToShow: null,
+      txHelper: new TransactionHelper(),
+      transFiltedArray: new Array(),
+      filerDate:  new Date(Date.now() - 12096e5)
     }
   },
   props: {
@@ -82,6 +86,11 @@ export default {
     deleteTx(idToDelete) {
       this.logger.debug('App is deleting a transaction: ' + idToDelete);
       this.txModel.deleteTx(idToDelete);
+    }
+  },
+  watch: {
+    transArray: function() {
+        this.txHelper.filterTxListFromDate(this.transArray, this.filerDate)
     }
   }
 }
