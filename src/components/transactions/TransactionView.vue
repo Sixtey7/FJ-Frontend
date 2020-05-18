@@ -6,7 +6,7 @@
         </v-btn>
     </div>
     <TransactionTable
-      :transactions = "transArray"
+      :transactions = "transFiltedArray"
       :accounts = "accountsArray"
       :logger = "logger"
       @edit="editTx"
@@ -90,7 +90,7 @@ export default {
   },
   watch: {
     transArray: function() {
-        this.txHelper.filterTxListFromDate(this.transArray, this.filerDate)
+        this.transFiltedArray = this.txHelper.filterTxListFromDate(this.transArray, this.filerDate)
     }
   }
 }
