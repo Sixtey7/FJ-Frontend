@@ -41,8 +41,6 @@ class TransactionHelper {
      * @param {Date} dateFilter the date that should be used in the filter
      */
     filterTxListFromDate(txList, dateFilter) {
-        this._logger.debug('Filting transaction list from date: ' + dateFilter);
-
         let returnArray = new Array(transaction => {
             transaction.date > dateFilter
         });
