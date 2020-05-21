@@ -42,7 +42,7 @@ export default {
       isModalVisible: false,
       txToShow: null,
       txHelper: new TransactionHelper(),
-      transFiltedArray: new Array(),
+      transFilteredArray: new Array(),
       filerDate:  new Date(Date.now() - 12096e5)
     }
   },
