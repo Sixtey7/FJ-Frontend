@@ -42,7 +42,7 @@ class TransactionHelper {
      */
     filterTxListFromDate(txList, dateFilter) {
         let returnArray = txList.filter(transaction => {
-            transaction.date > dateFilter
+            return transaction.date > dateFilter
         });
 
         return returnArray;
