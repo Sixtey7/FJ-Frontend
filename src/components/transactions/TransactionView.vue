@@ -6,7 +6,7 @@
         </v-btn>
     </div>
     <TransactionTable
-      :transactions = "transFiltedArray"
+      :transactions = "transFilteredArray"
       :accounts = "accountsArray"
       :logger = "logger"
       @edit="editTx"
@@ -42,7 +42,7 @@ export default {
       isModalVisible: false,
       txToShow: null,
       txHelper: new TransactionHelper(),
-      transFiltedArray: new Array(),
+      transFilteredArray: new Array(),
       filerDate:  new Date(Date.now() - 12096e5)
     }
   },
@@ -90,7 +90,7 @@ export default {
   },
   watch: {
     transArray: function() {
-        this.transFiltedArray = this.txHelper.filterTxListFromDate(this.transArray, this.filerDate)
+        this.transFilteredArray = this.txHelper.filterTxListFromDate(this.transArray, this.filerDate)
     }
   }
 }
