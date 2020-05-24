@@ -55,12 +55,12 @@ class TransactionHelper {
      */
     filterTx(txList, txFilter) {
         let returnArray = txList;
-        if (txFilter.isStartFiler && txFilter.isEndFilter) {
+        if (txFilter.isStartFilter && txFilter.isEndFilter) {
             returnArray = returnArray.filter(transaction => {
                 return (transaction.date > txFilter.startFilterDate && transaction.date < txFilter.endFilterDate);
             });
         }
-        else if (txFilter.isStartFiler) {
+        else if (txFilter.isStartFilter) {
             returnArray = returnArray.filter(transaction => {
                 return transaction.date > txFilter.startFilterDate;
             });
