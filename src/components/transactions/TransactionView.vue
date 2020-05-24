@@ -109,6 +109,11 @@ export default {
 #add-button-div {
     float: left;
     position: absolute;
-    z-index: 100
+    z-index: 100;
+}
+#filter-div {
+  float:right;
+  position: absolute;
+  z-index: 100;
 }
 </style>
