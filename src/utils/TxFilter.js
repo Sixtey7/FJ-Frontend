@@ -5,7 +5,7 @@ class TxFilter {
     endFilterDate;
 
     constructor(startFilerDate, endFilterDate) {
-        if (typeof startFilerDate !== 'undefined') {
+        if (startFilerDate !== null) {
             this.isStartFilter = true;
             this.startFilterDate = startFilerDate;
         }
@@ -14,7 +14,7 @@ class TxFilter {
             this.startFilterDate = null;
         }
 
-        if (typeof endFilterDate !== 'undefined') {
+        if (endFilterDate !== null) {
             this.isEndFilter = true;
             this.endFilterDate = endFilterDate;
         }
