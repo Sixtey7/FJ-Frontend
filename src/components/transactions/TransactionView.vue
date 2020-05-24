@@ -12,6 +12,7 @@
         prepend-icon="event"
         readonly
       ></v-text-field>
+    </div>
     <TransactionTable
       :transactions = "transFilteredArray"
       :accounts = "accountsArray"
