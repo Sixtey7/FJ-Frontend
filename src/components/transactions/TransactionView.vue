@@ -115,6 +115,6 @@ export default {
   position: absolute;
   z-index: 100;
   right: 0;
-  margin-right:10%;
+  margin-right:24px;
 }
 </style>
