@@ -12,6 +12,12 @@
         prepend-icon="event"
         readonly
       ></v-text-field>
+      <v-text-field
+        v-model="dateFilterStop"
+        label="Stop"
+        prepend-icon="event"
+        readonly
+      ></v-text-field>
     </div>
     <TransactionTable
       :transactions = "transFilteredArray"
@@ -112,8 +118,9 @@ export default {
     z-index: 100;
 }
 #filter-div {
-  float:right;
   position: absolute;
   z-index: 100;
+  right: 0;
+  margin-right:10%;
 }
 </style>
