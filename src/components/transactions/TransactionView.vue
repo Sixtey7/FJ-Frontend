@@ -5,19 +5,10 @@
             <v-icon dark right>add</v-icon>
         </v-btn>
     </div>
-    <div id = "filter-div">
-      <v-text-field
-        v-model="dateFilterStart"
-        label="Start"
-        prepend-icon="event"
-        readonly
-      ></v-text-field>
-      <v-text-field
-        v-model="dateFilterStop"
-        label="Stop"
-        prepend-icon="event"
-        readonly
-      ></v-text-field>
+    <div id="filter-div">
+      <v-btn id = "transaction-filter-button" color = "primary" dark @click="showFilterModal">Filter
+            <v-icon dark right>filter</v-icon>
+        </v-btn>
     </div>
     <TransactionTable
       :transactions = "transFilteredArray"
@@ -74,6 +65,9 @@ export default {
     closeModal() {
       this.isModalVisible = false;
       this.txToShow = null;
+    },
+    showFilterModal() {
+      this.logger.debug('Gotta show that sweet filter model');
     },
     async saveTx(transToSave) {
       this.isModalVisible = false;
