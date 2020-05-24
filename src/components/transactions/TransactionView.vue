@@ -49,8 +49,7 @@ export default {
       txToShow: null,
       txHelper: new TransactionHelper(),
       transFilteredArray: new Array(),
-      dateFilterStart:  new Date(Date.now() - 12096e5),
-      txFilter: new TxFilter(this.dateFilterStart, null)
+      txFilter: new TxFilter(new Date(Date.now() - 12096e5), null)
     }
   },
   props: {
