@@ -5,6 +5,13 @@
             <v-icon dark right>add</v-icon>
         </v-btn>
     </div>
+    <div id = "filter-div">
+      <v-text-field
+        v-model="dateFilterStart"
+        label="Start"
+        prepend-icon="event"
+        readonly
+      ></v-text-field>
     <TransactionTable
       :transactions = "transFilteredArray"
       :accounts = "accountsArray"
@@ -43,7 +50,7 @@ export default {
       txToShow: null,
       txHelper: new TransactionHelper(),
       transFilteredArray: new Array(),
-      filerDate:  new Date(Date.now() - 12096e5)
+      dateFilterStart:  new Date(Date.now() - 12096e5)
     }
   },
   props: {
@@ -90,7 +97,7 @@ export default {
   },
   watch: {
     transArray: function() {
-        this.transFilteredArray = this.txHelper.filterTxListFromDate(this.transArray, this.filerDate)
+        this.transFilteredArray = this.txHelper.filterTxListFromDate(this.transArray, this.dateFilterStart)
     }
   }
 }
