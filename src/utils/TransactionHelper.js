@@ -47,6 +47,34 @@ class TransactionHelper {
 
         return returnArray;
     }
+
+    /**
+     * Filters the provided list of transactions and returns all of the transactions matching the filter
+     * @param {Array} txList array containing the list of transactions
+     * @param {TxFilter} txFilter the filter object to be used
+     */
+    filterTx(txList, txFilter) {
+        let returnArray = txList;
+        if (txFilter.isStartFiler && txFilter.isEndFilter) {
+            returnArray = returnArray.filter(transaction => {
+                return (transaction.date > txFilter.startFilterDate && transaction.date < txFilter.endFilterDate);
+            });
+        }
+        else if (txFilter.isStartFiler) {
+            returnArray = returnArray.filter(transaction => {
+                return transaction.date > txFilter.startFilterDate;
+            });
+        }
+        else if (txFilter.isEndFilter) {
+            returnArray = returnArray.filter(transaction => {
+                return transaction.date < txFilter.endFilterDate;
+            })
+        }
+
+        return returnArray;
+    }
+
+
 }
 
 export default TransactionHelper;

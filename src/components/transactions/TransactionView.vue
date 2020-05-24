@@ -34,6 +34,7 @@ import TxModel from '../../model/TxModel.js';
 import AccountModel from '../../model/AccountModel';
 import Vue from 'vue';
 import TransactionHelper from '../../utils/TransactionHelper';
+import TxFilter from '../../utils/TxFilter';
 
 export default {
   name: 'TransactionView',
@@ -48,7 +49,8 @@ export default {
       txToShow: null,
       txHelper: new TransactionHelper(),
       transFilteredArray: new Array(),
-      dateFilterStart:  new Date(Date.now() - 12096e5)
+      dateFilterStart:  new Date(Date.now() - 12096e5),
+      txFilter: new TxFilter(this.dateFilterStart, null)
     }
   },
   props: {
@@ -98,7 +100,7 @@ export default {
   },
   watch: {
     transArray: function() {
-        this.transFilteredArray = this.txHelper.filterTxListFromDate(this.transArray, this.dateFilterStart)
+        this.transFilteredArray = this.txHelper.filterTx(this.transArray, this.txFilter)
     }
   }
 }
