@@ -5,6 +5,11 @@
             <v-icon dark right>add</v-icon>
         </v-btn>
     </div>
+    <div id="filter-div">
+      <v-btn id = "transaction-filter-button" color = "primary" dark @click="showFilterModal">Filter
+            <v-icon dark right>filter</v-icon>
+        </v-btn>
+    </div>
     <TransactionTable
       :transactions = "transFilteredArray"
       :accounts = "accountsArray"
@@ -29,6 +34,7 @@ import TxModel from '../../model/TxModel.js';
 import AccountModel from '../../model/AccountModel';
 import Vue from 'vue';
 import TransactionHelper from '../../utils/TransactionHelper';
+import TxFilter from '../../utils/TxFilter';
 
 export default {
   name: 'TransactionView',
@@ -43,7 +49,7 @@ export default {
       txToShow: null,
       txHelper: new TransactionHelper(),
       transFilteredArray: new Array(),
-      filerDate:  new Date(Date.now() - 12096e5)
+      txFilter: new TxFilter(new Date(Date.now() - 12096e5), null)
     }
   },
   props: {
@@ -60,6 +66,9 @@ export default {
     closeModal() {
       this.isModalVisible = false;
       this.txToShow = null;
+    },
+    showFilterModal() {
+      this.logger.debug('Gotta show that sweet filter model');
     },
     async saveTx(transToSave) {
       this.isModalVisible = false;
@@ -90,7 +99,7 @@ export default {
   },
   watch: {
     transArray: function() {
-        this.transFilteredArray = this.txHelper.filterTxListFromDate(this.transArray, this.filerDate)
+        this.transFilteredArray = this.txHelper.filterTx(this.transArray, this.txFilter)
     }
   }
 }
@@ -101,6 +110,12 @@ export default {
 #add-button-div {
     float: left;
     position: absolute;
-    z-index: 100
+    z-index: 100;
+}
+#filter-div {
+  position: absolute;
+  z-index: 100;
+  right: 0;
+  margin-right:24px;
 }
 </style>
