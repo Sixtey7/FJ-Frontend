@@ -1,10 +1,11 @@
 <script>
+import TxFilter from '../../utils/TxFilter';
 export default {
     name: 'TxFilterModal',
-    props: ['show', 'filterStartDate', 'filterEndDate'],
+    props: ['show', 'txFilter'],
     data: function() {
         return {
-
+            currentTxEdit: {}
         }
     },
     methods: {
@@ -13,19 +14,28 @@ export default {
             this.$emit('close');
         },
         save() {
-
+            let txFilterToEmit = JSON.parse(JSON.stringify(this.currentTxEdit));
+            this.$emit('save', txFilterToEmit);
+            this.clearValues();
         },
-        watch: {
-            show: function(show) {
-                if (show) {
-                    // TODO: Need to process the input parameters
+        clearValues() {
+            this.currentTxEdit = new TxFilter(null, null);
+        }
+    },
+    watch: {
+        show: function(show) {
+            if (show) {
+                // TODO: Need to process the input parameters
+                if (this.txFilter) {
+                    this.currentTxEdit = JSON.parse(JSON.stringify(this.txFilter));
                 }
-                else {
-                    this.clearValues();
-                }
+            }
+            else {
+                this.clearValues();
             }
         }
     }
+    
 }
 </script>
 <template>
