@@ -25,7 +25,6 @@ export default {
     watch: {
         show: function(show) {
             if (show) {
-                // TODO: Need to process the input parameters
                 if (this.txFilter) {
                     this.currentTxEdit = JSON.parse(JSON.stringify(this.txFilter));
                 }
@@ -60,14 +59,14 @@ export default {
                                 >
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
-                                            v-model="filterStartDate"
+                                            v-model="txFilter.startFilterDate"
                                             label="Start"
                                             prepend-icon="event"
                                             readonly
                                             v-on="on"
                                         ></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="filterStartDate" @input="menu = false"></v-date-picker>
+                                    <v-date-picker v-model="txFilter.startFilterDate" @input="menu = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                         </v-layout>
