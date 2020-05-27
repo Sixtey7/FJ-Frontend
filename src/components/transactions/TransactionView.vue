@@ -24,6 +24,11 @@
       @close="closeModal"
       @save="saveTx"
     />
+    <TxFilter
+      :show="isFilterModalVisible"
+      @close="closeFilterModal"
+      @save="saveFilter"
+    />
   </div>
 </template>
 
@@ -46,6 +51,7 @@ export default {
     return {
       txs: null  ,
       isModalVisible: false,
+      isFilterModalVisible: false,
       txToShow: null,
       txHelper: new TransactionHelper(),
       transFilteredArray: new Array(),
@@ -69,6 +75,10 @@ export default {
     },
     showFilterModal() {
       this.logger.debug('Gotta show that sweet filter model');
+      this.isFilterModalVisible = true;
+    },
+    closeFilterModal() {
+      this.isFilterModalVisible = false;
     },
     async saveTx(transToSave) {
       this.isModalVisible = false;
@@ -84,6 +94,9 @@ export default {
           this.acctModel.updateAccountInCache(acct);
         });
       }
+    },
+    async saveFilter(txFilter) {
+      this.logger.debug('Got the filter: ' + JSON.stringify(txFilter));
     },
     editTx(idToEdit) {
       this.logger.debug('App is editing a transction: ---' + idToEdit + '---');
