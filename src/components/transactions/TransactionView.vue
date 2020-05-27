@@ -26,6 +26,7 @@
     />
     <TxFilterModal
       :show="isFilterModalVisible"
+      :txFilter="txFilter"
       @close="closeFilterModal"
       @save="saveFilter"
     />
