@@ -45,7 +45,8 @@ export default {
   name: 'TransactionView',
   components: {
     TransactionTable,
-    TxModal
+    TxModal,
+    TxFilter
   },
   data() {
     return {
