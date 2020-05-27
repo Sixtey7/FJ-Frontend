@@ -24,7 +24,7 @@
       @close="closeModal"
       @save="saveTx"
     />
-    <TxFilter
+    <TxFilterModal
       :show="isFilterModalVisible"
       @close="closeFilterModal"
       @save="saveFilter"
@@ -40,13 +40,14 @@ import AccountModel from '../../model/AccountModel';
 import Vue from 'vue';
 import TransactionHelper from '../../utils/TransactionHelper';
 import TxFilter from '../../utils/TxFilter';
+import TxFilterModal from './TxFilterModal'
 
 export default {
   name: 'TransactionView',
   components: {
     TransactionTable,
     TxModal,
-    TxFilter
+    TxFilterModal
   },
   data() {
     return {
