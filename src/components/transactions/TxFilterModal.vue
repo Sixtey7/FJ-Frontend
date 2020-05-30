@@ -69,6 +69,29 @@ export default {
                                     <v-date-picker v-model="txFilter.startFilterDate" @input="menu = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
+                            <v-flex xs12>
+                                <v-menu
+                                    v-model="menu"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    lazy
+                                    transition="scale-transition"
+                                    offset-y
+                                    full-width
+                                    min-width="290px"
+                                >
+                                    <template v-slot:activator="{ on }">
+                                        <v-text-field
+                                            v-model="txFilter.EndFilterDate"
+                                            label="End"
+                                            prepend-icon="event"
+                                            readonly
+                                            v-on="on"
+                                        ></v-text-field>
+                                    </template>
+                                    <v-date-picker v-model="txFilter.endFilterDate" @input="menu = false"></v-date-picker>
+                                </v-menu>
+                            </v-flex>
                         </v-layout>
                     </v-container>
                 </v-card-text>
