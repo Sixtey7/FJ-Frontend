@@ -82,7 +82,7 @@ export default {
                                 >
                                     <template v-slot:activator="{ on }">
                                         <v-text-field
-                                            v-model="txFilter.EndFilterDate"
+                                            v-model="txFilter.endFilterDate"
                                             label="End"
                                             prepend-icon="event"
                                             readonly
