@@ -5,7 +5,9 @@ export default {
     props: ['show', 'txFilter'],
     data: function() {
         return {
-            currentTxEdit: {}
+            currentTxEdit: {},
+            startMenu: false,
+            endMenu: false
         }
     },
     methods: {
@@ -48,7 +50,7 @@ export default {
                         <v-layout wrap>
                             <v-flex xs12>
                                 <v-menu
-                                    v-model="menu"
+                                    v-model="startMenu"
                                     :close-on-content-click="false"
                                     :nudge-right="40"
                                     lazy
@@ -66,12 +68,12 @@ export default {
                                             v-on="on"
                                         ></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="txFilter.startFilterDate" @input="menu = false"></v-date-picker>
+                                    <v-date-picker v-model="txFilter.startFilterDate" @input="startMenu = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                             <v-flex xs12>
                                 <v-menu
-                                    v-model="menu"
+                                    v-model="endMenu"
                                     :close-on-content-click="false"
                                     :nudge-right="40"
                                     lazy
@@ -89,7 +91,7 @@ export default {
                                             v-on="on"
                                         ></v-text-field>
                                     </template>
-                                    <v-date-picker v-model="txFilter.endFilterDate" @input="menu = false"></v-date-picker>
+                                    <v-date-picker v-model="txFilter.endFilterDate" @input="endMenu = false"></v-date-picker>
                                 </v-menu>
                             </v-flex>
                         </v-layout>
