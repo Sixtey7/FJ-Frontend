@@ -49,6 +49,9 @@ export default {
                     <v-container grid-list-md>
                         <v-layout wrap>
                             <v-flex xs12>
+                                <v-switch
+                                    v-model="txFilter.isStartFilter"
+                                />
                                 <v-menu
                                     v-model="startMenu"
                                     :close-on-content-click="false"
