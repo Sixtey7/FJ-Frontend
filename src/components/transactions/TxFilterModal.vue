@@ -52,6 +52,7 @@ export default {
                                 <v-flex xs4>
                                     <v-switch
                                         v-model="txFilter.isStartFilter"
+                                        label="Set Start"
                                     />
                                 </v-flex>
                                 <v-flex xs8>
