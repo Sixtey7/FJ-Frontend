@@ -48,34 +48,32 @@ export default {
                 <v-card-text>
                     <v-container grid-list-md>
                         <v-layout wrap>
-                            <v-flex xs12>
-                                <v-layout row>
-                                    <v-switch
-                                        v-model="txFilter.isStartFilter"
-                                    />
-                                    <v-menu
-                                        v-model="startMenu"
-                                        :close-on-content-click="false"
-                                        :nudge-right="40"
-                                        lazy
-                                        transition="scale-transition"
-                                        offset-y
-                                        full-width
-                                        min-width="290px"
-                                    >
-                                        <template v-slot:activator="{ on }">
-                                            <v-text-field
-                                                v-model="txFilter.startFilterDate"
-                                                label="Start"
-                                                prepend-icon="event"
-                                                readonly
-                                                v-on="on"
-                                            ></v-text-field>
-                                        </template>
-                                        <v-date-picker v-model="txFilter.startFilterDate" @input="startMenu = false"></v-date-picker>
-                                    </v-menu>
-                                </v-layout>
-                            </v-flex>
+                            <v-layout row>
+                                <v-switch
+                                    v-model="txFilter.isStartFilter"
+                                />
+                                <v-menu
+                                    v-model="startMenu"
+                                    :close-on-content-click="false"
+                                    :nudge-right="40"
+                                    lazy
+                                    transition="scale-transition"
+                                    offset-y
+                                    full-width
+                                    min-width="290px"
+                                >
+                                    <template v-slot:activator="{ on }">
+                                        <v-text-field
+                                            v-model="txFilter.startFilterDate"
+                                            label="Start"
+                                            prepend-icon="event"
+                                            readonly
+                                            v-on="on"
+                                        ></v-text-field>
+                                    </template>
+                                    <v-date-picker v-model="txFilter.startFilterDate" @input="startMenu = false"></v-date-picker>
+                                </v-menu>
+                            </v-layout>
                             <v-flex xs12>
                                 <v-menu
                                     v-model="endMenu"
