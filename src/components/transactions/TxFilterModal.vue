@@ -73,6 +73,7 @@ export default {
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                :disabled="!txFilter.isStartFilter"
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker v-model="txFilter.startFilterDate" @input="startMenu = false"></v-date-picker>
@@ -104,6 +105,7 @@ export default {
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
+                                                :disabled="!txFilter.isEndFilter"
                                             ></v-text-field>
                                         </template>
                                         <v-date-picker v-model="txFilter.endFilterDate" @input="endMenu = false"></v-date-picker>
