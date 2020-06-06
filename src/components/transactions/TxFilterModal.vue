@@ -17,6 +17,14 @@ export default {
         },
         save() {
             let txFilterToEmit = JSON.parse(JSON.stringify(this.currentTxEdit));
+            if (!txFilterToEmit.isStartFilter) {
+                txFilterToEmit.startFilter = null;
+            }
+
+            if (!txFilterToEmit.isEndFitler) {
+                txFilterToEmit.endFilter = null;
+            }
+            
             this.$emit('save', txFilterToEmit);
             this.clearValues();
         },
