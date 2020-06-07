@@ -1,5 +1,6 @@
 <script>
 import TxFilter from '../../utils/TxFilter';
+
 export default {
     name: 'TxFilterModal',
     props: ['show', 'txFilter'],
