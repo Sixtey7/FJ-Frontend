@@ -100,7 +100,7 @@ export default {
     },
     async saveFilter(txFilter) {
       this.logger.debug('Got the filter: ' + JSON.stringify(txFilter));
-      this.txFilter = JSON.parse(JSON.stringify(txFilter));
+      this.txFilter = Object.assign(new TxFilter, JSON.stringify(txFilter));
       this.isFilterModalVisible = false;
       this.filterTxs();
     },
