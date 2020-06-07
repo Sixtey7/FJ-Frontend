@@ -57,21 +57,21 @@ class TransactionHelper {
         // TODO - These conversions (new Date) feel bad, but they work for now
         let returnArray = txList;
         if (txFilter.isStartFilter && txFilter.isEndFilter) {
-            let startFilterDate = new Date(txFilter.startFilterDate);
-            let endFilterDate = new Date(txFilter.endFilterDate);
+            let startFilterDate = txFilter.startFilterAsDate();
+            let endFilterDate = txFilter.endFilterAsDate();
             returnArray = returnArray.filter(transaction => {
                 return (transaction.date > startFilterDate && transaction.date < endFilterDate);
             });
         }
         else if (txFilter.isStartFilter) {
-            let startFilterDate = new Date(txFilter.startFilterDate);
+            let startFilterDate = txFilter.startFilterAsDate();
             returnArray = returnArray.filter(transaction => {
                 //return transaction.date > txFilter.startFilterDate;
                 return transaction.date > startFilterDate;
             });
         }
         else if (txFilter.isEndFilter) {
-            let endFilterDate = new Date(txFilter.endFilterDate);
+            let endFilterDate = txFilter.endFilterAsDate();
             returnArray = returnArray.filter(transaction => {
                 return transaction.date < endFilterDate;
             });
