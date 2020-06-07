@@ -41,7 +41,7 @@ import AccountModel from '../../model/AccountModel';
 import Vue from 'vue';
 import TransactionHelper from '../../utils/TransactionHelper';
 import TxFilter from '../../utils/TxFilter';
-import TxFilterModal from './TxFilterModal'
+import TxFilterModal from './TxFilterModal';
 
 export default {
   name: 'TransactionView',

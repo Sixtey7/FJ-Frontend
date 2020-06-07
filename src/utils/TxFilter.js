@@ -1,3 +1,4 @@
+import moment from 'moment';
 class TxFilter {
     isStartFilter;
     isEndFilter;
@@ -7,7 +8,7 @@ class TxFilter {
     constructor(startFilerDate, endFilterDate) {
         if (startFilerDate !== null) {
             this.isStartFilter = true;
-            this.startFilterDate = startFilerDate;
+            this.startFilterDate = moment.utc(startFilerDate).format('MMM DD, YYYY');
         }
         else {
             this.isStartFilter = false;
@@ -16,7 +17,7 @@ class TxFilter {
 
         if (endFilterDate !== null) {
             this.isEndFilter = true;
-            this.endFilterDate = endFilterDate;
+            this.endFilterDate = moment.utc(endFilterDate).format('MMM DD, YYYY');
         }
         else {
             this.isEndFilter = false;
