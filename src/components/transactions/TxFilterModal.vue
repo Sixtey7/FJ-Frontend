@@ -38,6 +38,7 @@ export default {
             if (show) {
                 if (this.txFilter) {
                     this.currentTxEdit = JSON.parse(JSON.stringify(this.txFilter));
+                    this.currentTxEdit.startFilterDate = new Date(this.currentTxEdit.startFilterDate);
                 }
             }
             else {
