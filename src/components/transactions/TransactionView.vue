@@ -100,6 +100,7 @@ export default {
     },
     async saveFilter(txFilter) {
       this.logger.debug('Got the filter: ' + JSON.stringify(txFilter));
+      this.txFilter = JSON.parse(JSON.stringify(txFilter));
     },
     editTx(idToEdit) {
       this.logger.debug('App is editing a transction: ---' + idToEdit + '---');
