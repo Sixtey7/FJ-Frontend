@@ -42,6 +42,10 @@ class TxFilter {
             return null;
         }
     }
+
+    static fromJSON(json) {
+        return Object.assign(this, json);
+    }
 }
 
 export default TxFilter;
