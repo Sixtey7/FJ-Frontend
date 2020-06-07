@@ -61,8 +61,10 @@ class TransactionHelper {
             });
         }
         else if (txFilter.isStartFilter) {
+            let compareDate = new Date(txFilter.startFilterDate);
             returnArray = returnArray.filter(transaction => {
-                return transaction.date > txFilter.startFilterDate;
+                //return transaction.date > txFilter.startFilterDate;
+                return transaction.date > compareDate;
             });
         }
         else if (txFilter.isEndFilter) {
