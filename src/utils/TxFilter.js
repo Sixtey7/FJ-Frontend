@@ -24,6 +24,28 @@ class TxFilter {
             this.endFilterDate = null;
         }
     }
+
+    startFilterAsDate() {
+        if (this.isStartFilter) {
+            return new Date(this.startFilterDate);
+        }
+        else {
+            return null;
+        }
+    }
+
+    endFilterAsDate() {
+        if (this.isEndFilter) {
+            return new Date(this.endFilterDate);
+        }
+        else {
+            return null;
+        }
+    }
+
+    static fromJSON(json) {
+        return Object.assign(this, json);
+    }
 }
 
 export default TxFilter;

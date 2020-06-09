@@ -54,21 +54,27 @@ class TransactionHelper {
      * @param {TxFilter} txFilter the filter object to be used
      */
     filterTx(txList, txFilter) {
+        // TODO - These conversions (new Date) feel bad, but they work for now
         let returnArray = txList;
         if (txFilter.isStartFilter && txFilter.isEndFilter) {
+            let startFilterDate = txFilter.startFilterAsDate();
+            let endFilterDate = txFilter.endFilterAsDate();
             returnArray = returnArray.filter(transaction => {
-                return (transaction.date > txFilter.startFilterDate && transaction.date < txFilter.endFilterDate);
+                return (transaction.date > startFilterDate && transaction.date < endFilterDate);
             });
         }
         else if (txFilter.isStartFilter) {
+            let startFilterDate = txFilter.startFilterAsDate();
             returnArray = returnArray.filter(transaction => {
-                return transaction.date > txFilter.startFilterDate;
+                //return transaction.date > txFilter.startFilterDate;
+                return transaction.date > startFilterDate;
             });
         }
         else if (txFilter.isEndFilter) {
+            let endFilterDate = txFilter.endFilterAsDate();
             returnArray = returnArray.filter(transaction => {
-                return transaction.date < txFilter.endFilterDate;
-            })
+                return transaction.date < endFilterDate;
+            });
         }
 
         return returnArray;

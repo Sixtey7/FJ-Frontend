@@ -100,7 +100,10 @@ export default {
     },
     async saveFilter(txFilter) {
       this.logger.debug('Got the filter: ' + JSON.stringify(txFilter));
-      this.txFilter = JSON.parse(JSON.stringify(txFilter));
+      //this.txFilter = Object.assign(new TxFilter(), JSON.stringify(txFilter));
+      this.txFilter = TxFilter.fromJSON(JSON.stringify(txFilter));
+      this.isFilterModalVisible = false;
+      this.filterTxs();
     },
     editTx(idToEdit) {
       this.logger.debug('App is editing a transction: ---' + idToEdit + '---');
@@ -112,11 +115,15 @@ export default {
     deleteTx(idToDelete) {
       this.logger.debug('App is deleting a transaction: ' + idToDelete);
       this.txModel.deleteTx(idToDelete);
+    },
+    filterTxs() {
+      this.transFilteredArray = this.txHelper.filterTx(this.transArray, this.txFilter);
     }
   },
   watch: {
     transArray: function() {
-        this.transFilteredArray = this.txHelper.filterTx(this.transArray, this.txFilter)
+        // this.transFilteredArray = this.txHelper.filterTx(this.transArray, this.txFilter)
+        this.filterTxs();
     }
   }
 }
