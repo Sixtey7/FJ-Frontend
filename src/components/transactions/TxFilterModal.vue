@@ -60,7 +60,7 @@ export default {
                             <v-layout row>
                                 <v-flex xs4>
                                     <v-switch
-                                        v-model="txFilter.isStartFilter"
+                                        v-model="currentTxEdit.isStartFilter"
                                         label="Set Start"
                                     />
                                 </v-flex>
@@ -77,22 +77,22 @@ export default {
                                     >
                                         <template v-slot:activator="{ on }">
                                             <v-text-field
-                                                v-model="txFilter.startFilterDate"
+                                                v-model="currentTxEdit.startFilterDate"
                                                 label="Start"
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
-                                                :disabled="!txFilter.isStartFilter"
+                                                :disabled="!currentTxEdit.isStartFilter"
                                             ></v-text-field>
                                         </template>
-                                        <v-date-picker v-model="txFilter.startFilterDate" @input="startMenu = false"></v-date-picker>
+                                        <v-date-picker v-model="currentTxEdit.startFilterDate" @input="startMenu = false"></v-date-picker>
                                     </v-menu>
                                 </v-flex>
                             </v-layout>
                             <v-layout row>
                                 <v-flex xs4>
                                     <v-switch
-                                        v-model="txFilter.isEndFilter"
+                                        v-model="currentTxEdit.isEndFilter"
                                         label="Set End"
                                     />
                                 </v-flex>
@@ -114,10 +114,10 @@ export default {
                                                 prepend-icon="event"
                                                 readonly
                                                 v-on="on"
-                                                :disabled="!txFilter.isEndFilter"
+                                                :disabled="!currentTxEdit.isEndFilter"
                                             ></v-text-field>
                                         </template>
-                                        <v-date-picker v-model="txFilter.endFilterDate" @input="endMenu = false"></v-date-picker>
+                                        <v-date-picker v-model="currentTxEdit.endFilterDate" @input="endMenu = false"></v-date-picker>
                                     </v-menu>
                                 </v-flex>
                             </v-layout>
