@@ -44,7 +44,7 @@ class TxFilter {
     }
 
     static fromJSON(json) {
-        return Object.assign(this, json);
+        return new TxFilter(json.startFilerDate, json.endFilterDate);
     }
 }
 
