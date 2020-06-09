@@ -34,7 +34,7 @@ class TxFilter {
         }
     }
 
-    endFiterAsDate() {
+    endFilterAsDate() {
         if (this.isEndFilter) {
             return new Date(this.endFilterDate);
         }
