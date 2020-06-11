@@ -72,7 +72,7 @@ export default {
                                     <v-switch
                                         v-model="currentTxEdit.isStartFilter"
                                         label="Set Start"
-                                        :change="turnOffStartSwitch"
+                                        v-on:change="turnOffStartSwitch"
                                     />
                                 </v-flex>
                                 <v-flex xs8>
@@ -105,7 +105,7 @@ export default {
                                     <v-switch
                                         v-model="currentTxEdit.isEndFilter"
                                         label="Set End"
-                                        :change="turnOffEndSwitch"
+                                        v-on:change="turnOffEndSwitch"
                                     />
                                 </v-flex>
                                 <v-flex xs8>
