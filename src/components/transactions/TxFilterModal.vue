@@ -34,12 +34,12 @@ export default {
         },
         turnOffStartSwitch() {
             if (!this.isStartFilter) {
-                this.startFilter = null;
+                this.currentTxEdit.startFilterDate = null;
             }
         },
         turnOffEndSwitch() {
             if (!this.isEndFitler) {
-                this.endFilter = null;
+                this.currentTxEdit.endFilterDate = null;
             }
         }
     },
