@@ -34,12 +34,12 @@ export default {
         },
         turnOffStartSwitch() {
             if (!this.isStartFilter) {
-                this.startFilter = null;
+                this.currentTxEdit.startFilterDate = null;
             }
         },
         turnOffEndSwitch() {
             if (!this.isEndFitler) {
-                this.endFilter = null;
+                this.currentTxEdit.endFilterDate = null;
             }
         }
     },
@@ -72,7 +72,7 @@ export default {
                                     <v-switch
                                         v-model="currentTxEdit.isStartFilter"
                                         label="Set Start"
-                                        :click="turnOffStartSwitch"
+                                        v-on:change="turnOffStartSwitch"
                                     />
                                 </v-flex>
                                 <v-flex xs8>
@@ -105,7 +105,7 @@ export default {
                                     <v-switch
                                         v-model="currentTxEdit.isEndFilter"
                                         label="Set End"
-                                        :click="turnOffEndSwitch"
+                                        v-on:change="turnOffEndSwitch"
                                     />
                                 </v-flex>
                                 <v-flex xs8>
