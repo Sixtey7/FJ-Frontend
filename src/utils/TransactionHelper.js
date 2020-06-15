@@ -66,7 +66,6 @@ class TransactionHelper {
         else if (txFilter.isStartFilter) {
             let startFilterDate = txFilter.startFilterAsDate();
             returnArray = returnArray.filter(transaction => {
-                //return transaction.date > txFilter.startFilterDate;
                 return transaction.date > startFilterDate;
             });
         }
