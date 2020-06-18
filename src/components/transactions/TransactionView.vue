@@ -122,7 +122,6 @@ export default {
   },
   watch: {
     transArray: function() {
-        // this.transFilteredArray = this.txHelper.filterTx(this.transArray, this.txFilter)
         this.filterTxs();
     }
   }
