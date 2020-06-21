@@ -1,3 +1,6 @@
+/**
+ * Class used to assist with operations on Account objects
+ */
 class AccountHelper {
     _logger;
 
@@ -5,7 +8,11 @@ class AccountHelper {
         this._logger = logger;
     }
 
-
+    /**
+     * Merges the provided account into the provided array, replacing it if it already exists, adding it if it doesn't
+     * @param {Account} accountToMerge The account to be merged into the array
+     * @param {Array} accountsArray The array to merge the account into
+     */
     async mergeAccountIntoArray(accountToMerge, accountsArray) {
         let index = accountsArray.findIndex(account => {
             return account.id === accountToMerge.id;

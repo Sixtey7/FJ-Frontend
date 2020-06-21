@@ -1,5 +1,11 @@
+/**
+ * Class used to assist with working with Transaction objects on the frontend
+ */
 class TransactionHelper {
-
+    /**
+     * Massages the transations to prepare them for processing on the frontend
+     * @param {Array} transactionList Array of Transaction objects
+     */
     massageTransactions(transactionList) {
         
         if (typeof(transactionList) !== 'undefined') {
@@ -16,6 +22,11 @@ class TransactionHelper {
         return transactionList;
     } 
 
+    /**
+     * Compares two provided transactions in order to properly sequence them (by date)
+     * @param {Transaction} a One of the transactions to compare
+     * @param {Transaction} b The other transaction to compare
+     */
      _compareTx(a, b) {
         if (a.date < b.date) {
             return -1;
@@ -27,6 +38,10 @@ class TransactionHelper {
         return 0;
     }
 
+    /**
+     * Calculates the balance of all of the transactions in the provided list
+     * @param {Array} transactionList The list of transactions to have their balance calculated
+     */
     _calculateBalance(transactionList) {
         let currentBalance = 0;
         transactionList.forEach(transaction => {
