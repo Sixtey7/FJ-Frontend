@@ -6,7 +6,7 @@ Front end for a small 'Finance Journal' style application that will be used to t
 Written as an experiment in playing with Vue.js
 
 ### Related Projects
-The backend is written in Java and hosted in the repo: https://github.com/Sixtey7/FJ-Backend
+The backend is written in Java and hosted in the repo: [FJ-Backend](https://github.com/Sixtey7/FJ-Backend)
 
 ## Project setup
 ```
