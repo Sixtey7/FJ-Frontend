@@ -3,6 +3,11 @@ import AccountHelper from '../utils/AccountHelper';
 
 const urlSuffix = '/accounts/';
 
+/**
+ * Model class used to manage and interact with Account objects
+ * 
+ * Serves as the primary interaction point with the backend
+ */
 class AccountModel {
 
     accountsArray;

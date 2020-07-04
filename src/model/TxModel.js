@@ -3,6 +3,11 @@ import TransactionHelper from '../utils/TransactionHelper';
 
 const urlSuffix = '/transactions/';
 
+/**
+ * Model class used to manage and interact with Transcation objects
+ * 
+ * Serves as the primary interaction point with the backend
+ */
 class TxModel {
     txArray;
     _txHelper;
