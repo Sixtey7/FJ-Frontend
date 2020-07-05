@@ -33,6 +33,11 @@ class AccountModel {
             });
     }
 
+    /**
+     * Updates the cache of accounts and calls the backend to persist the Account
+     * Also updates the total for the account based on the account's transactions
+     * @param {Account} accountToSave The account to be saved
+     */
     async saveAccount(accountToSave) {
         //determine if this is an existing account or a new one
         if (accountToSave.id) {
@@ -66,6 +71,11 @@ class AccountModel {
         }
     }
 
+    /**
+     * Deletes the account with the provided UUID from the cache
+     * Also calls the backend to remove the account
+     * @param {String} idToDelete String contining the UUID to be deleted
+     */
     async deleteAccount(idToDelete) {
         this._logger.debug('Deleting an account with id: ' + idToDelete);
 
@@ -88,6 +98,11 @@ class AccountModel {
         }
     }
 
+    /**
+     * Helper method used to interact with the Backend's PUT method
+     * @param {Account} accountToPut The account object to PUT to the backend
+     * @private
+     */
     async _putAccount(accountToPut) {
         //need to delete the empty id to prevent the backend from trying to handle it
         delete accountToPut.id;
@@ -114,6 +129,11 @@ class AccountModel {
         return returnVal;
     }
 
+    /**
+     * Helper method used to interact with the Backend's POST object
+     * @param {Account} accountToPost The account object to POST to the backend
+     * @private
+     */
     async _postAccount(accountToPost) {
         let accountJSON = JSON.stringify(accountToPost);
 
@@ -144,6 +164,11 @@ class AccountModel {
         return returnVal;
     }
 
+    /**
+     * Helper method used to interact with the Backend's DELETE method
+     * @param {String} idToDelete String containing the UUID to be deleted
+     * @private
+     */
     async _deleteAccount(idToDelete) {
         this._logger.debug('Deleting account with id: ' + idToDelete);
 
@@ -168,14 +193,25 @@ class AccountModel {
         return returnVal;
     }
 
+    /**
+     * Takes in an account object and updates the account cache to contain that object
+     * @param {Account} acctToUpdate Account to be merged into the account cache
+     */
     async updateAccountInCache(acctToUpdate) {
         this.accountsArray = await this._accountHelper.mergeAccountIntoArray(acctToUpdate, this.accountsArray);
     }
 
+    /**
+     * Replaces the current account cache with the provided array
+     * @param {Array} acctsToUpdate Array of Account objects to replace the account cache with
+     */
     async clearAndUpdateCache(acctsToUpdate) {
         this.accountsArray = acctsToUpdate;
     }
 
+    /**
+     * Determines the total balance for all accounts in the cache
+     */
     async determineTotal() {
         this._logger.debug('Detemrining the total for all accounts');
         let total = 0;
