@@ -32,6 +32,10 @@ class TxModel {
         this.txArray = this._txHelper.massageTransactions(this.txArray);
     }
 
+    /**
+     * Updates the cache of transactions and calls the backend to persist the Transaction
+     * @param {Transaction} txToSave The transaction to be saved
+     */
     async saveTx(txToSave) {
         //determine if this is a new tx or a new one
         if (txToSave.id) {
@@ -83,6 +87,11 @@ class TxModel {
         }
     }
 
+    /**
+     * Deletes the transaction with the provided UUID from the cache
+     * Also calls the backend to remove the transaction
+     * @param {String} idToDelete String containing the UUID of the transaction to be deleted
+     */
     async deleteTx(idToDelete) {
         this._logger.debug('Deleting a transaction with id: ' + idToDelete);
 
@@ -105,6 +114,10 @@ class TxModel {
         }
     }
 
+    /**
+     * Helper method used to interact with the Backend's PUT method
+     * @param {Transaction} txToPut The transaction object to PUT to the backend
+     */
     async _putTx(txToPut) {
         //need to delete the empty id to prevent the backend from trying to handle it
         delete txToPut.id;
@@ -162,6 +175,10 @@ class TxModel {
         return returnVal;
     }
 
+    /**
+     * Helper method used to ineract with the Backend's DELETE method
+     * @param {String} idToDelete String containing the UUID to be deleted
+     */
     async _deleteTx(idToDelete) {
 
         this._logger.debug('Deleting transaction with id: ' + idToDelete);
@@ -188,6 +205,10 @@ class TxModel {
         return returnVal;
     }
 
+    /**
+     * Replaces the current transaction cache with the provided array
+     * @param {Array} newTxArray Array of Transaction objects to replace the transaction cache with
+     */
     async clearAndUpdateCache(newTxArray) {
         this.txArray = this._txHelper.massageTransactions(newTxArray);
     }
