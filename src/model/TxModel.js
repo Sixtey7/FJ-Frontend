@@ -144,6 +144,10 @@ class TxModel {
         return returnVal;
     }
 
+    /** 
+    * Helper method used to interact with the Backend's POST method
+    * @param {Transaction} txToPost The transaction object to POST to the backend
+    */
     async _postTx(txToPost) {
         let txJSON = JSON.stringify(txToPost);
 
