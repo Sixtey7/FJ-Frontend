@@ -41,7 +41,7 @@ export default {
     props: {
         accountModel: AccountModel,
         accountsArray: Array,
-        accountTotal: Number,
+        accountTotal: String,
         logger: Object
     },
     methods: {

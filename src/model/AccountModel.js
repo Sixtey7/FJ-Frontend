@@ -213,7 +213,7 @@ class AccountModel {
      * Determines the total balance for all accounts in the cache
      */
     async determineTotal() {
-        this._logger.debug('Detemrining the total for all accounts');
+        this._logger.debug('Determining the total for all accounts');
         let total = 0;
         this.accountsArray.forEach(account => {
             total += account.amount;
