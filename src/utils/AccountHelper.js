@@ -8,6 +8,16 @@ class AccountHelper {
         this._logger = logger;
     }
 
+    massageAccounts(accountList) {
+        accountList.forEach(account => {
+            if (typeof account.amount !== 'undefined') {
+                account.amount = parseFloat(account.amount, 10);
+            }
+        });
+
+        return accountList;
+    }
+
     /**
      * Merges the provided account into the provided array, replacing it if it already exists, adding it if it doesn't
      * @param {Account} accountToMerge The account to be merged into the array

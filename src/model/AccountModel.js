@@ -25,7 +25,7 @@ class AccountModel {
         axios
             .get(this.backendURL)
             .then(response => {
-                this.accountsArray = response.data;
+                this.accountsArray = this._accountHelper.massageAccounts(response.data);
                 
                 this._logger.debug('got ' + this.accountsArray.length + ' accounts!');
 
